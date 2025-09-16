@@ -1,0 +1,233 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f6f6f6;
+  color: #333;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Barra de Pesquisa */
+.search-container {
+  text-align: center;
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #1a237e;
+  box-shadow: 0 0 5px #1a237e;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1a237e;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #283593;
+}
+
+/* Seção Quem Somos */
+#quem-somos {
+  margin-top: 40px;
+  font-size: 1.1rem;
+  color: #444;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#quem-somos h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #1a237e;
+}
+
+/* Logo dentro da seção Quem Somos */
+#quem-somos .logo-quem-somos {
+  display: block;
+  margin: 20px auto;
+  max-width: 200px; /* controla o tamanho da logo */
+  height: auto;     /* mantém proporção */
+  border-radius: 10px; /* opcional: cantos arredondados */
+}
+
+/* Produtos */
+.outros-ebooks {
+  margin-top: 40px;
+}
+
+.outros-ebooks h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1a237e;
+}
+
+.produto {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.produto:hover {
+  transform: translateY(-3px);
+}
+
+.produto img {
+  width: 150px;
+  height: 225px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.produto-info {
+  flex: 1;
+}
+
+.produto-info h3 {
+  font-size: 1.6rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.produto-info p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.valor {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #1a237e;
+}
+
+/* FAQ e Avaliações */
+.faq .pergunta, .avaliacao {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.faq .pergunta:hover, .avaliacao:hover {
+  transform: translateY(-2px);
+}
+
+.faq .pergunta p {
+  display: none;
+  margin-top: 10px;
+  color: #333;
+  font-size: 1rem;
+}
+
+.faq .pergunta.ativo p {
+  display: block;
+}
+
+/* Avaliações */
+.avaliacoes-geral {
+  margin-top: 20px;
+}
+
+.avaliacao h4 {
+  font-size: 1.2rem;
+  color: #1a237e;
+  margin-bottom: 5px;
+}
+
+.avaliacao p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.avaliacao span {
+  color: #fbc02d;
+  font-size: 1rem;
+}
+
+/* Ajuda */
+#ajuda {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#ajuda .telefone {
+  font-weight: bold;
+  color: #1a237e;
+  font-size: 1.2rem;
+}
+
+/* Rodapé */
+footer {
+  background: #1a237e;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+  border-radius: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .produto {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .produto img {
+    width: 120px;
+    height: 180px;
+  }
+
+  .produto-info {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
