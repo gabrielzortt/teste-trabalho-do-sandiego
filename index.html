@@ -4,19 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Venda de eBooks - Creators of the Future</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styleA.css" />
 </head>
 <body>
+  <!-- Barra de pesquisa e login -->
   <header>
     <div class="search-container">
       <input type="text" class="search-bar" placeholder="Pesquisar produtos..." />
     </div>
+    <div class="auth-buttons" id="auth-area">
+      <button id="btn-entrar">Entrar</button>
+      <button id="btn-registrar">Registrar</button>
+    </div>
   </header>
 
+  <!-- Produto não encontrado -->
   <div id="sem-produto" style="display:none; text-align:center; margin-top:20px;">
     <h2>Produto não identificado</h2>
   </div>
 
+  <!-- Seção Quem Somos -->
   <section id="quem-somos">
     <h2>Quem Somos</h2>
     <img src="https://github.com/gabrielzortt/Venda-de-Ebook/blob/main/05552d41-df4b-4b4a-abd2-0991d4e63a57.jpg?raw=true" 
@@ -31,51 +38,58 @@
     </p>
   </section>
 
+  <!-- Seção de Produtos -->
   <section class="outros-ebooks">
     <h2>eBook em Destaque</h2>
-    <div class="produto destaque">
+    <div class="produto destaque" data-id="ebook1">
       <img src="https://raw.githubusercontent.com/gabrielzortt/Venda-de-Ebook/refs/heads/main/capa.jpg" 
            alt="Como Ganhar Dinheiro com o Celular" />
       <div class="produto-info">
         <h3>📱 Como Ganhar Dinheiro com o Celular</h3>
         <p>Aprenda métodos práticos e testados para começar a ganhar dinheiro com seu celular ainda hoje!</p>
         <div class="valor">💰 R$ 19,90</div>
-        <button onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
+        <button class="btn-comprar" data-id="ebook1" onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
       </div>
     </div>
 
     <h2>Outros eBooks</h2>
     <div class="grid-produtos">
-      <div class="produto">
+      <div class="produto" data-id="ebook2">
         <div class="produto-info">
           <h3>💻 Empreendedorismo Digital para Iniciantes</h3>
           <p>Aprenda a criar e gerir seu próprio negócio digital com baixo investimento inicial!</p>
           <div class="valor">💰 R$ 29,90</div>
-          <button onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
+          <button class="btn-comprar" data-id="ebook2" onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
         </div>
       </div>
 
-      <div class="produto">
+      <div class="produto" data-id="ebook3">
         <div class="produto-info">
           <h3>📊 Investindo para Iniciantes - Comece com R$ 100</h3>
           <p>Descubra como investir de forma segura mesmo com pouco dinheiro. Ideal para iniciantes!</p>
           <div class="valor">💰 R$ 19,90</div>
-          <button onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
+          <button class="btn-comprar" data-id="ebook3" onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
         </div>
       </div>
 
-      <div class="produto">
+      <div class="produto" data-id="ebook4">
         <div class="produto-info">
           <h3>💻 Vendas Online - Como Criar Seu Negócio</h3>
           <p>Saiba como construir uma loja virtual, fazer anúncios e gerar vendas de forma automatizada.</p>
           <div class="valor">💰 R$ 39,90</div>
-          <button onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
+          <button class="btn-comprar" data-id="ebook4" onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ, Avaliações, Ajuda e Rodapé permanecem iguais -->
+  <!-- Seção Biblioteca -->
+  <section id="biblioteca" style="display:none;">
+    <h2>Minha Biblioteca</h2>
+    <div id="biblioteca-list"></div>
+  </section>
+
+  <!-- Seção FAQ -->
   <section id="duvidas">
     <h2>Dúvidas Frequentes</h2>
     <div class="faq">
@@ -98,6 +112,7 @@
     </div>
   </section>
 
+  <!-- Seção Avaliações -->
   <section id="avaliacoes">
     <h2>Avaliações dos Usuários</h2>
     <div class="avaliacoes-geral">
@@ -119,17 +134,21 @@
     </div>
   </section>
 
+  <!-- Seção Ajuda -->
   <section id="ajuda">
     <h2>Precisa de Ajuda?</h2>
     <p>Se tiver qualquer dúvida ou problema, entre em contato conosco pelo telefone:</p>
     <p class="telefone">📞 (92) 99427-4276</p>
   </section>
 
+  <!-- Rodapé -->
   <footer>
     <p>&copy; 2025 Creators of the Future - Todos os direitos reservados.</p>
   </footer>
 
+  <!-- Script -->
   <script>
+    // FAQ
     const perguntas = document.querySelectorAll('.faq .pergunta');
     perguntas.forEach(pergunta => {
       pergunta.addEventListener('click', () => {
@@ -139,6 +158,7 @@
       });
     });
 
+    // Pesquisa
     const searchInput = document.querySelector(".search-bar");
     const produtos = document.querySelectorAll(".produto");
     const quemSomos = document.getElementById("quem-somos");
@@ -185,6 +205,118 @@
       }
     }
     searchInput.addEventListener("input", filtrarProdutos);
+
+    // Login/Cadastro + Biblioteca persistente
+    (function(){
+      const authArea = document.getElementById('auth-area');
+      const bibliotecaSection = document.getElementById('biblioteca');
+      const bibliotecaList = document.getElementById('biblioteca-list');
+
+      function getUsers(){ return JSON.parse(localStorage.getItem('users')||'{}'); }
+      function setUsers(u){ localStorage.setItem('users', JSON.stringify(u)); }
+      function getCurrentUser(){ return localStorage.getItem('currentUser'); }
+      function setCurrentUser(email){ localStorage.setItem('currentUser', email); renderAuth(); renderBiblioteca(); }
+      function clearCurrentUser(){ localStorage.removeItem('currentUser'); renderAuth(); renderBiblioteca(); }
+
+      function renderAuth(){
+        const cur = getCurrentUser();
+        if(cur){
+          const users = getUsers();
+          const nome = users[cur]?.nome || cur;
+          authArea.innerHTML = `
+            <div class="user-info">
+              <span>Olá, ${nome}</span>
+              <button id="btn-logout">Sair</button>
+            </div>
+          `;
+          document.getElementById('btn-logout').addEventListener('click', clearCurrentUser);
+        } else {
+          authArea.innerHTML = `
+            <button id="btn-entrar">Entrar</button>
+            <button id="btn-registrar">Registrar</button>
+          `;
+          document.getElementById('btn-entrar').addEventListener('click', ()=>showModal('modal-entrar'));
+          document.getElementById('btn-registrar').addEventListener('click', ()=>showModal('modal-registrar'));
+        }
+      }
+
+      function criarModal(id, titulo, innerHTML){
+        let m = document.createElement('div');
+        m.className='modal'; m.id=id;
+        m.innerHTML = `<div class="modal-content"><h3>${titulo}</h3>${innerHTML}</div>`;
+        document.body.appendChild(m);
+        m.addEventListener('click', e=>{ if(e.target===m) hideModal(id); });
+      }
+      function showModal(id){ document.getElementById(id).style.display='flex'; }
+      function hideModal(id){ document.getElementById(id).style.display='none'; }
+
+      const formRegistrar = `
+        <input type="text" id="reg-nome" placeholder="Nome" />
+        <input type="email" id="reg-email" placeholder="Email" />
+        <input type="password" id="reg-senha" placeholder="Senha" />
+        <div class="actions">
+          <button id="reg-cancel">Cancelar</button>
+          <button id="reg-submit">Cadastrar</button>
+        </div>`;
+      const formEntrar = `
+        <input type="email" id="login-email" placeholder="Email" />
+        <input type="password" id="login-senha" placeholder="Senha" />
+        <div class="actions">
+          <button id="login-cancel">Cancelar</button>
+          <button id="login-submit">Entrar</button>
+        </div>`;
+      criarModal('modal-registrar','Registrar',formRegistrar);
+      criarModal('modal-entrar','Entrar',formEntrar);
+
+      document.addEventListener('click', e=>{
+        if(e.target.id==='reg-cancel') hideModal('modal-registrar');
+        if(e.target.id==='reg-submit'){
+          const nome=document.getElementById('reg-nome').value.trim();
+          const email=document.getElementById('reg-email').value.trim().toLowerCase();
+          const senha=document.getElementById('reg-senha').value;
+          if(!nome||!email||!senha){ alert('Preencha todos os campos'); return; }
+          let users=getUsers();
+          if(users[email]){ alert('Email já cadastrado! Use outro.'); return; }
+          // Verificar se nome já existe
+          for(let k in users){ if(users[k].nome.toLowerCase()===nome.toLowerCase()){ alert('Nome já existe! Use outro.'); return; } }
+          users[email]={nome,senha,biblioteca:[]};
+          setUsers(users);
+          setCurrentUser(email); hideModal('modal-registrar');
+        }
+        if(e.target.id==='login-cancel') hideModal('modal-entrar');
+        if(e.target.id==='login-submit'){
+          const email=document.getElementById('login-email').value.trim().toLowerCase();
+          const senha=document.getElementById('login-senha').value;
+          let users=getUsers();
+          if(users[email] && users[email].senha===senha){ setCurrentUser(email); hideModal('modal-entrar'); }
+          else alert('Usuário ou senha incorretos');
+        }
+      });
+
+      // Biblioteca
+      function renderBiblioteca(){
+        const cur = getCurrentUser();
+        if(cur){
+          bibliotecaSection.style.display='block';
+          const users=getUsers();
+          const ebooks = users[cur].biblioteca || [];
+          bibliotecaList.innerHTML = ebooks.length ? ebooks.map(id=>`<div>${id}</div>`).join('') : '<p>Você ainda não comprou nenhum eBook.</p>';
+        } else bibliotecaSection.style.display='none';
+      }
+
+      // Salvar compras
+      document.querySelectorAll('.btn-comprar').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          const cur=getCurrentUser(); if(!cur) return;
+          let users=getUsers();
+          let ebookId = btn.dataset.id;
+          if(!users[cur].biblioteca.includes(ebookId)){ users[cur].biblioteca.push(ebookId); setUsers(users); renderBiblioteca(); }
+        });
+      });
+
+      renderAuth();
+      renderBiblioteca();
+    })();
   </script>
 </body>
 </html>
