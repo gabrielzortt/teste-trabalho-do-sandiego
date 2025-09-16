@@ -71,13 +71,12 @@ button:hover {
   color: #1a237e;
 }
 
-/* Logo dentro da seção Quem Somos */
 #quem-somos .logo-quem-somos {
   display: block;
   margin: 20px auto;
-  max-width: 200px; /* controla o tamanho da logo */
-  height: auto;     /* mantém proporção */
-  border-radius: 10px; /* opcional: cantos arredondados */
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
 }
 
 /* Produtos */
@@ -230,4 +229,58 @@ footer {
   button {
     width: 100%;
   }
+}
+
+/* --- Estilos do sistema de login/cadastro --- */
+.auth-buttons {
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.user-info {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  color:#1a237e;
+  font-weight:600;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  z-index: 9999;
+}
+
+.modal .modal-content {
+  background: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.modal .modal-content h3 {
+  margin-bottom: 12px;
+  color: #1a237e;
+}
+
+.modal .modal-content input {
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+.modal .modal-content .actions {
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  margin-top:10px;
 }
