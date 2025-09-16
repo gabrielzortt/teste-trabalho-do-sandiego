@@ -71,6 +71,7 @@ button:hover {
   color: #1a237e;
 }
 
+/* Logo da seção Quem Somos */
 #quem-somos .logo-quem-somos {
   display: block;
   margin: 20px auto;
@@ -236,6 +237,7 @@ footer {
   display:flex;
   gap:10px;
   align-items:center;
+  justify-content:center;
 }
 
 .user-info {
