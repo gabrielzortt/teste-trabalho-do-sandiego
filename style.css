@@ -13,10 +13,10 @@ body {
   line-height: 1.6;
 }
 
-/* Barra de Pesquisa */
+/* Barra de pesquisa e auth */
 .search-container {
   text-align: center;
-  margin: 40px 0;
+  margin: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,8 +39,13 @@ body {
   box-shadow: 0 0 5px #1a237e;
 }
 
-button {
-  padding: 12px 20px;
+.auth-buttons {
+  margin-top: 10px;
+}
+
+.auth-buttons button, .user-info button {
+  padding: 8px 15px;
+  margin: 0 5px;
   border: none;
   border-radius: 8px;
   background-color: #1a237e;
@@ -50,7 +55,7 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.auth-buttons button:hover, .user-info button:hover {
   background-color: #283593;
 }
 
@@ -71,13 +76,11 @@ button:hover {
   color: #1a237e;
 }
 
-/* Logo da seção Quem Somos */
 #quem-somos .logo-quem-somos {
-  display: block;
-  margin: 20px auto;
-  max-width: 200px;
-  height: auto;
+  width: 200px;
+  margin-bottom: 20px;
   border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* Produtos */
@@ -103,11 +106,12 @@ button:hover {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .produto:hover {
   transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .produto img {
@@ -138,6 +142,56 @@ button:hover {
   margin-bottom: 15px;
   font-size: 1.2rem;
   color: #1a237e;
+}
+
+button.btn-comprar {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: #1a237e;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.btn-comprar:hover {
+  background-color: #283593;
+}
+
+/* Biblioteca */
+#biblioteca {
+  margin-top: 40px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#biblioteca h2 {
+  font-size: 2rem;
+  color: #1a237e;
+  margin-bottom: 20px;
+}
+
+#biblioteca-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+#biblioteca-list div {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+
+#biblioteca-list div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
 
 /* FAQ e Avaliações */
@@ -210,79 +264,71 @@ footer {
   border-radius: 8px;
 }
 
+/* Modais */
+.modal {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background: rgba(0,0,0,0.5);
+  z-index:1000;
+}
+
+.modal-content {
+  background:#fff;
+  padding:25px 20px;
+  border-radius:10px;
+  width: 90%;
+  max-width:400px;
+  text-align:center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.modal-content h3 {
+  margin-bottom:15px;
+  color:#1a237e;
+}
+
+.modal-content input {
+  width: 100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+.modal-content .actions {
+  display:flex;
+  justify-content: space-between;
+  margin-top:15px;
+}
+
+.modal-content .actions button {
+  flex:1;
+  margin: 0 5px;
+  padding:10px;
+  border-radius:6px;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .produto {
     flex-direction: column;
     text-align: center;
   }
-
   .produto img {
     width: 120px;
     height: 180px;
   }
-
   .produto-info {
     margin-left: 0;
     margin-top: 10px;
   }
-
-  button {
+  button, .auth-buttons button {
     width: 100%;
   }
-}
-
-/* --- Estilos do sistema de login/cadastro --- */
-.auth-buttons {
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:center;
-}
-
-.user-info {
-  display:flex;
-  gap:10px;
-  align-items:center;
-  color:#1a237e;
-  font-weight:600;
-}
-
-.modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.4);
-  z-index: 9999;
-}
-
-.modal .modal-content {
-  background: white;
-  padding: 20px;
-  width: 90%;
-  max-width: 420px;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-
-.modal .modal-content h3 {
-  margin-bottom: 12px;
-  color: #1a237e;
-}
-
-.modal .modal-content input {
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:6px;
-  border:1px solid #ccc;
-}
-
-.modal .modal-content .actions {
-  display:flex;
-  gap:10px;
-  justify-content:flex-end;
-  margin-top:10px;
+  #biblioteca-list {
+    grid-template-columns: 1fr;
+  }
 }
