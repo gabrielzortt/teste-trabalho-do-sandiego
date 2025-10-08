@@ -4,17 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Venda de eBooks - Creators of the Future</title>
-  <link rel="stylesheet" href="styleA.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- NOTE: EmailJS SDK será carregado no final (parte 3) -->
 </head>
 <body>
-  <!-- Barra de pesquisa e login -->
+  <!-- Barra de pesquisa -->
   <header>
     <div class="search-container">
       <input type="text" class="search-bar" placeholder="Pesquisar produtos..." />
-    </div>
-    <div class="auth-buttons" id="auth-area">
-      <button id="btn-entrar">Entrar</button>
-      <button id="btn-registrar">Registrar</button>
     </div>
   </header>
 
@@ -41,55 +38,55 @@
   <!-- Seção de Produtos -->
   <section class="outros-ebooks">
     <h2>eBook em Destaque</h2>
-    <div class="produto destaque" data-id="ebook1">
+    
+    <!-- Produto real com imagem -->
+    <div class="produto destaque">
       <img src="https://raw.githubusercontent.com/gabrielzortt/Venda-de-Ebook/refs/heads/main/capa.jpg" 
            alt="Como Ganhar Dinheiro com o Celular" />
       <div class="produto-info">
         <h3>📱 Como Ganhar Dinheiro com o Celular</h3>
         <p>Aprenda métodos práticos e testados para começar a ganhar dinheiro com seu celular ainda hoje!</p>
         <div class="valor">💰 R$ 19,90</div>
-        <button class="btn-comprar" data-id="ebook1" onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
+        <button onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">
+          📲 Comprar Agora
+        </button>
       </div>
     </div>
-
     <h2>Outros eBooks</h2>
     <div class="grid-produtos">
-      <div class="produto" data-id="ebook2">
+      <!-- Produto 2 sem imagem -->
+      <div class="produto">
         <div class="produto-info">
           <h3>💻 Empreendedorismo Digital para Iniciantes</h3>
           <p>Aprenda a criar e gerir seu próprio negócio digital com baixo investimento inicial!</p>
           <div class="valor">💰 R$ 29,90</div>
-          <button class="btn-comprar" data-id="ebook2" onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
+          <button>📲 Comprar Agora</button>
         </div>
       </div>
 
-      <div class="produto" data-id="ebook3">
+      <!-- Produto 3 sem imagem -->
+      <div class="produto">
         <div class="produto-info">
           <h3>📊 Investindo para Iniciantes - Comece com R$ 100</h3>
           <p>Descubra como investir de forma segura mesmo com pouco dinheiro. Ideal para iniciantes!</p>
           <div class="valor">💰 R$ 19,90</div>
-          <button class="btn-comprar" data-id="ebook3" onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
+          <button>📲 Comprar Agora</button>
         </div>
       </div>
 
-      <div class="produto" data-id="ebook4">
+      <!-- Produto 4 sem imagem -->
+      <div class="produto">
         <div class="produto-info">
           <h3>💻 Vendas Online - Como Criar Seu Negócio</h3>
           <p>Saiba como construir uma loja virtual, fazer anúncios e gerar vendas de forma automatizada.</p>
           <div class="valor">💰 R$ 39,90</div>
-          <button class="btn-comprar" data-id="ebook4" onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">📲 Comprar Agora</button>
+          <button>📲 Comprar Agora</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Seção Biblioteca -->
-  <section id="biblioteca" style="display:none;">
-    <h2>Minha Biblioteca</h2>
-    <div id="biblioteca-list"></div>
-  </section>
-
-  <!-- Seção FAQ -->
+  <!-- Seção de Dúvidas Frequentes -->
   <section id="duvidas">
     <h2>Dúvidas Frequentes</h2>
     <div class="faq">
@@ -112,7 +109,7 @@
     </div>
   </section>
 
-  <!-- Seção Avaliações -->
+  <!-- Seção de Avaliações -->
   <section id="avaliacoes">
     <h2>Avaliações dos Usuários</h2>
     <div class="avaliacoes-geral">
@@ -134,7 +131,7 @@
     </div>
   </section>
 
-  <!-- Seção Ajuda -->
+  <!-- Seção de Ajuda -->
   <section id="ajuda">
     <h2>Precisa de Ajuda?</h2>
     <p>Se tiver qualquer dúvida ou problema, entre em contato conosco pelo telefone:</p>
@@ -146,19 +143,24 @@
     <p>&copy; 2025 Creators of the Future - Todos os direitos reservados.</p>
   </footer>
 
-  <!-- Script -->
+  <!-- Scripts principais do site -->
   <script>
-    // FAQ
+    // FAQ interativo com animação
     const perguntas = document.querySelectorAll('.faq .pergunta');
     perguntas.forEach(pergunta => {
       pergunta.addEventListener('click', () => {
         const resposta = pergunta.querySelector('p');
-        resposta.style.display = resposta.style.display === 'block' ? 'none' : 'block';
-        pergunta.classList.toggle('ativo');
+        if(resposta.style.display === 'block'){
+          resposta.style.display = 'none';
+          pergunta.classList.remove('ativo');
+        } else {
+          resposta.style.display = 'block';
+          pergunta.classList.add('ativo');
+        }
       });
     });
 
-    // Pesquisa
+    // Pesquisa com filtro e produto não identificado
     const searchInput = document.querySelector(".search-bar");
     const produtos = document.querySelectorAll(".produto");
     const quemSomos = document.getElementById("quem-somos");
@@ -171,6 +173,7 @@
     function filtrarProdutos() {
       const termo = searchInput.value.toLowerCase();
       let encontrado = false;
+
       produtos.forEach(produto => {
         const texto = produto.innerText.toLowerCase();
         if (texto.includes(termo)) {
@@ -182,13 +185,16 @@
       });
 
       if (termo === "") {
+        // Campo vazio: mostrar tudo
         quemSomos.style.display = "block";
         outrosEbooks.style.display = "block";
         duvidas.style.display = "block";
         avaliacoes.style.display = "block";
         ajuda.style.display = "block";
         semProduto.style.display = "none";
+        produtos.forEach(p => p.style.display = "flex");
       } else if (!encontrado) {
+        // Produto não encontrado
         quemSomos.style.display = "none";
         outrosEbooks.style.display = "none";
         duvidas.style.display = "none";
@@ -196,6 +202,7 @@
         ajuda.style.display = "none";
         semProduto.style.display = "block";
       } else {
+        // Produto encontrado
         quemSomos.style.display = "none";
         outrosEbooks.style.display = "block";
         duvidas.style.display = "none";
@@ -204,119 +211,484 @@
         semProduto.style.display = "none";
       }
     }
+
     searchInput.addEventListener("input", filtrarProdutos);
+  </script>
 
-    // Login/Cadastro + Biblioteca persistente
-    (function(){
-      const authArea = document.getElementById('auth-area');
-      const bibliotecaSection = document.getElementById('biblioteca');
-      const bibliotecaList = document.getElementById('biblioteca-list');
+  <!-- CSS isolado para a sessão de usuário (não altera seu style.css) -->
+  <style>
+    /* CSS isolado para a sessão de usuário - prefixo sessao-usuario- */
+    .sessao-usuario-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;z-index:99999}
+    .sessao-usuario-modal{background:#fff;border-radius:12px;max-width:520px;width:96%;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.25);font-family:inherit}
+    .sessao-usuario-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .sessao-usuario-title{font-size:18px;font-weight:700}
+    .sessao-usuario-close{background:transparent;border:0;font-size:22px;cursor:pointer}
+    .sessao-usuario-form{display:flex;flex-direction:column;gap:10px}
+    .sessao-usuario-input{padding:10px;border-radius:8px;border:1px solid #ddd;font-size:14px;width:100%}
+    .sessao-usuario-btn{padding:10px 14px;border-radius:8px;border:0;background:#1a237e;color:#fff;font-weight:700;cursor:pointer}
+    .sessao-usuario-secondary{background:transparent;color:#1a237e;border:1px solid #1a237e}
+    .sessao-usuario-note{font-size:13px;color:#666}
+    .sessao-usuario-flex{display:flex;gap:10px;align-items:center}
+    .sessao-usuario-avatar{width:72px;height:72px;border-radius:10px;object-fit:cover;border:1px solid #eee}
+    .sessao-usuario-footer{margin-top:10px;display:flex;justify-content:space-between;align-items:center}
+    .sessao-usuario-floating{position:fixed;right:18px;bottom:18px;background:#111;color:#fff;padding:12px 14px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.25);z-index:99998;cursor:pointer;font-weight:700;border:0}
+    .sessao-usuario-link{background:none;border:0;color:#1a237e;cursor:pointer;font-size:14px;padding:0}
+    .sessao-usuario-hidden{display:none}
+    .sessao-usuario-error{color:#b00020;font-size:13px}
+    .sessao-usuario-success{color:green;font-size:13px}
+    @media (max-width:480px){
+      .sessao-usuario-modal{padding:14px}
+      .sessao-usuario-avatar{width:56px;height:56px}
+    }
+  </style>
 
-      function getUsers(){ return JSON.parse(localStorage.getItem('users')||'{}'); }
-      function setUsers(u){ localStorage.setItem('users', JSON.stringify(u)); }
-      function getCurrentUser(){ return localStorage.getItem('currentUser'); }
-      function setCurrentUser(email){ localStorage.setItem('currentUser', email); renderAuth(); renderBiblioteca(); }
-      function clearCurrentUser(){ localStorage.removeItem('currentUser'); renderAuth(); renderBiblioteca(); }
+  <div id="sessao-usuario-root"></div>
+  <script>
+  (function(){
+    // --- Helpers criptográficos (Web Crypto) ---
+    const textEncoder = new TextEncoder();
 
-      function renderAuth(){
-        const cur = getCurrentUser();
-        if(cur){
-          const users = getUsers();
-          const nome = users[cur]?.nome || cur;
-          authArea.innerHTML = `
-            <div class="user-info">
-              <span>Olá, ${nome}</span>
-              <button id="btn-logout">Sair</button>
+    function toHex(buffer){
+      return Array.from(new Uint8Array(buffer)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+    function fromHex(hex){
+      const bytes = new Uint8Array(hex.length/2);
+      for(let i=0;i<bytes.length;i++) bytes[i]=parseInt(hex.substr(i*2,2),16);
+      return bytes.buffer;
+    }
+    async function derivePasswordHash(password, saltHex, iterations=120000){
+      const salt = saltHex ? new Uint8Array(fromHex(saltHex)) : crypto.getRandomValues(new Uint8Array(16));
+      const keyMaterial = await crypto.subtle.importKey('raw', textEncoder.encode(password), {name:'PBKDF2'}, false, ['deriveBits']);
+      const derived = await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations,hash:'SHA-256'}, keyMaterial, 256);
+      return {hashHex: toHex(derived), saltHex: toHex(salt)};
+    }
+
+    // --- Storage helpers ---
+    function loadUsers(){ try { return JSON.parse(localStorage.getItem('sessao_users')||'{}'); } catch(e){ return {}; } }
+    function saveUsers(obj){ localStorage.setItem('sessao_users', JSON.stringify(obj)); }
+    function setCurrent(email){ localStorage.setItem('sessao_current', email || ''); }
+    function getCurrent(){ return localStorage.getItem('sessao_current') || ''; }
+    function saveResetToken(email, token, expiresAt){
+      const tokens = JSON.parse(localStorage.getItem('sessao_reset_tokens')||'{}');
+      tokens[email] = {token, expiresAt};
+      localStorage.setItem('sessao_reset_tokens', JSON.stringify(tokens));
+    }
+    function getResetToken(email){
+      const tokens = JSON.parse(localStorage.getItem('sessao_reset_tokens')||'{}');
+      return tokens[email] || null;
+    }
+    function removeResetToken(email){
+      const tokens = JSON.parse(localStorage.getItem('sessao_reset_tokens')||'{}');
+      delete tokens[email];
+      localStorage.setItem('sessao_reset_tokens', JSON.stringify(tokens));
+    }
+
+    // --- UI injection ---
+    const root = document.getElementById('sessao-usuario-root');
+    root.innerHTML = `
+      <button id="sessao-usuario-floating" class="sessao-usuario-floating" title="Minha Conta">Minha Conta</button>
+      <div id="sessao-usuario-overlay" class="sessao-usuario-overlay" aria-hidden="true">
+        <div class="sessao-usuario-modal" role="dialog" aria-modal="true" id="sessao-usuario-modal"></div>
+      </div>
+    `;
+
+    const overlay = document.getElementById('sessao-usuario-overlay');
+    const modal = document.getElementById('sessao-usuario-modal');
+    const floatingBtn = document.getElementById('sessao-usuario-floating');
+
+    function openModal(html){ modal.innerHTML = html; overlay.style.display='flex'; overlay.setAttribute('aria-hidden','false'); }
+    function closeModal(){ overlay.style.display='none'; overlay.setAttribute('aria-hidden','true'); }
+    overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+    // --- Templates ---
+    function loginTemplate(msg=''){
+      return `
+        <div class="sessao-usuario-header">
+          <div class="sessao-usuario-title">Entrar</div>
+          <button class="sessao-usuario-close" data-action="close">&times;</button>
+        </div>
+        <form id="sessao-usuario-login" class="sessao-usuario-form">
+          <input class="sessao-usuario-input" id="sessao-usuario-login-email" placeholder="E-mail" type="email" required />
+          <input class="sessao-usuario-input" id="sessao-usuario-login-password" placeholder="Senha" type="password" required />
+          <div class="sessao-usuario-error" id="sessao-usuario-login-msg">${msg}</div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+            <button class="sessao-usuario-btn" type="submit">Entrar</button>
+            <button type="button" class="sessao-usuario-link" id="sessao-usuario-to-signup">Criar conta</button>
+          </div>
+          <div class="sessao-usuario-footer">
+            <button type="button" class="sessao-usuario-link" id="sessao-usuario-forgot">Esqueci a senha</button>
+          </div>
+        </form>
+      `;
+    }
+
+    function signupTemplate(msg=''){
+      return `
+        <div class="sessao-usuario-header">
+          <div class="sessao-usuario-title">Criar Conta</div>
+          <button class="sessao-usuario-close" data-action="close">&times;</button>
+        </div>
+        <form id="sessao-usuario-signup" class="sessao-usuario-form">
+          <input class="sessao-usuario-input" id="sessao-usuario-signup-name" placeholder="Nome completo" type="text" required />
+          <input class="sessao-usuario-input" id="sessao-usuario-signup-email" placeholder="E-mail" type="email" required />
+          <input class="sessao-usuario-input" id="sessao-usuario-signup-password" placeholder="Senha (mín 8 caracteres)" type="password" required />
+          <div class="sessao-usuario-note sessao-usuario-small">Você poderá adicionar foto depois no perfil.</div>
+          <div class="sessao-usuario-error" id="sessao-usuario-signup-msg">${msg}</div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+            <button class="sessao-usuario-btn" type="submit">Cadastrar</button>
+            <button type="button" class="sessao-usuario-link" id="sessao-usuario-to-login">Já tenho conta</button>
+          </div>
+        </form>
+      `;
+    }
+    function forgotTemplate(){
+      return `
+        <div class="sessao-usuario-header">
+          <div class="sessao-usuario-title">Recuperar Senha</div>
+          <button class="sessao-usuario-close" data-action="close">&times;</button>
+        </div>
+        <form id="sessao-usuario-forgot-form" class="sessao-usuario-form">
+          <input class="sessao-usuario-input" id="sessao-usuario-forgot-email" placeholder="Digite seu e-mail" type="email" required />
+          <div class="sessao-usuario-note">Será gerado um token de recuperação. Um e-mail será enviado para o endereço informado.</div>
+          <div class="sessao-usuario-success sessao-usuario-hidden" id="sessao-usuario-forgot-success"></div>
+          <div class="sessao-usuario-error" id="sessao-usuario-forgot-msg"></div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+            <button class="sessao-usuario-btn" type="submit">Gerar token</button>
+            <button class="sessao-usuario-link" type="button" id="sessao-usuario-to-login-2">Voltar</button>
+          </div>
+        </form>
+      `;
+    }
+
+    function resetTemplate(){
+      return `
+        <div class="sessao-usuario-header">
+          <div class="sessao-usuario-title">Resetar Senha</div>
+          <button class="sessao-usuario-close" data-action="close">&times;</button>
+        </div>
+        <form id="sessao-usuario-reset-form" class="sessao-usuario-form">
+          <input class="sessao-usuario-input" id="sessao-usuario-reset-email" placeholder="E-mail" type="email" required />
+          <input class="sessao-usuario-input" id="sessao-usuario-reset-token" placeholder="Token de recuperação" type="text" required />
+          <input class="sessao-usuario-input" id="sessao-usuario-reset-password" placeholder="Nova senha" type="password" required />
+          <div class="sessao-usuario-error" id="sessao-usuario-reset-msg"></div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+            <button class="sessao-usuario-btn" type="submit">Resetar senha</button>
+            <button class="sessao-usuario-link" type="button" id="sessao-usuario-to-login-3">Voltar</button>
+          </div>
+        </form>
+      `;
+    }
+
+    function profileTemplate(user){
+      const photoHtml = user.photoDataUrl ? `<img src="${user.photoDataUrl}" class="sessao-usuario-avatar" id="sessao-usuario-avatar-img" />` : `<div style="width:72px;height:72px;border-radius:10px;background:#f1f1f1;display:flex;align-items:center;justify-content:center;color:#666" id="sessao-usuario-avatar-img">Sem foto</div>`;
+      return `
+        <div class="sessao-usuario-header">
+          <div class="sessao-usuario-title">Minha Conta</div>
+          <button class="sessao-usuario-close" data-action="close">&times;</button>
+        </div>
+        <div class="sessao-usuario-form" id="sessao-usuario-profile-form">
+          <div class="sessao-usuario-flex">
+            ${photoHtml}
+            <div style="flex:1">
+              <input class="sessao-usuario-input" id="sessao-usuario-profile-name" value="${user.name || ''}" placeholder="Nome completo" />
+              <input class="sessao-usuario-input" id="sessao-usuario-profile-email" value="${user.email || ''}" placeholder="E-mail" />
+              <label class="sessao-usuario-note">Alterar foto: <input type="file" id="sessao-usuario-profile-photo" accept="image/*" /></label>
             </div>
-          `;
-          document.getElementById('btn-logout').addEventListener('click', clearCurrentUser);
+          </div>
+
+          <hr />
+
+          <div class="sessao-usuario-note">Alterar senha</div>
+          <input class="sessao-usuario-input" id="sessao-usuario-profile-current-password" placeholder="Senha atual (necessário para trocar)" type="password" />
+          <input class="sessao-usuario-input" id="sessao-usuario-profile-new-password" placeholder="Nova senha" type="password" />
+          <div class="sessao-usuario-error" id="sessao-usuario-profile-msg"></div>
+
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+            <button class="sessao-usuario-link" id="sessao-usuario-logout">Sair</button>
+            <button class="sessao-usuario-btn" id="sessao-usuario-save-profile">Salvar</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- Actions & Handlers ---
+    function showLogin(msg=''){ openModal(loginTemplate(msg)); initLoginHandlers(); }
+    function showSignup(msg=''){ openModal(signupTemplate(msg)); initSignupHandlers(); }
+    function showForgot(){ openModal(forgotTemplate()); initForgotHandlers(); }
+    function showReset(){ openModal(resetTemplate()); initResetHandlers(); }
+    function showProfile(){ 
+      const users = loadUsers();
+      const current = getCurrent();
+      if(!current || !users[current]){ showLogin(); return; }
+      openModal(profileTemplate({name:users[current].name, email: users[current].email, photoDataUrl: users[current].photoDataUrl}));
+      initProfileHandlers();
+    }
+
+    function initLoginHandlers(){
+      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
+      modal.querySelector('#sessao-usuario-to-signup').addEventListener('click', ()=> showSignup());
+      modal.querySelector('#sessao-usuario-forgot').addEventListener('click', ()=> showForgot());
+      modal.querySelector('#sessao-usuario-login').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const email = modal.querySelector('#sessao-usuario-login-email').value.trim().toLowerCase();
+        const password = modal.querySelector('#sessao-usuario-login-password').value;
+        const users = loadUsers();
+        const msgEl = modal.querySelector('#sessao-usuario-login-msg');
+        msgEl.textContent = '';
+        if(!users[email]){ msgEl.textContent = 'Conta não encontrada.'; return; }
+        const {saltHex, hashHex: storedHash} = users[email];
+        const {hashHex} = await derivePasswordHash(password, saltHex);
+        if(hashHex !== storedHash){ msgEl.textContent = 'Senha incorreta.'; return; }
+        setCurrent(email);
+        closeModal();
+        onAuthChange(true);
+      });
+    }
+
+    function initSignupHandlers(){
+      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
+      modal.querySelector('#sessao-usuario-to-login').addEventListener('click', ()=> showLogin());
+      modal.querySelector('#sessao-usuario-signup').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const name = modal.querySelector('#sessao-usuario-signup-name').value.trim();
+        const email = modal.querySelector('#sessao-usuario-signup-email').value.trim().toLowerCase();
+        const password = modal.querySelector('#sessao-usuario-signup-password').value;
+        const msgEl = modal.querySelector('#sessao-usuario-signup-msg');
+        msgEl.textContent = '';
+        if(password.length < 8){ msgEl.textContent = 'Senha muito curta (mín 8 chars).'; return; }
+        const users = loadUsers();
+        if(users[email]){ msgEl.textContent = 'Já existe uma conta com este e-mail.'; return; }
+        const {hashHex, saltHex} = await derivePasswordHash(password, null);
+        users[email] = {name, email, saltHex, hashHex, photoDataUrl: ''};
+        saveUsers(users);
+        setCurrent(email);
+        closeModal();
+        onAuthChange(true);
+      });
+    }
+
+    // --- EmailJS integration will be invoked in forgot handler ---
+    // We'll load and init EmailJS at the bottom of this script.
+
+    function initForgotHandlers(){
+      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
+      modal.querySelector('#sessao-usuario-to-login-2').addEventListener('click', ()=> showLogin());
+      modal.querySelector('#sessao-usuario-forgot-form').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const email = modal.querySelector('#sessao-usuario-forgot-email').value.trim().toLowerCase();
+        const msgEl = modal.querySelector('#sessao-usuario-forgot-msg');
+        const successEl = modal.querySelector('#sessao-usuario-forgot-success');
+        msgEl.textContent = ''; successEl.textContent=''; successEl.classList.add('sessao-usuario-hidden');
+        const users = loadUsers();
+        if(!users[email]){ msgEl.textContent = 'E-mail não encontrado.'; return; }
+
+        // generate token
+        const token = Math.random().toString(36).slice(2,10).toUpperCase();
+        const expiresAt = Date.now() + (1000*60*15); // 15 minutes
+        saveResetToken(email, token, expiresAt);
+
+        // prepare name for email
+        const nomeParaEmail = (users[email].name && users[email].name.trim()) ? users[email].name.trim() : email.split('@')[0];
+
+        // send via EmailJS
+        // the template expects: to_name, to_email, token
+        // service/template/public keys are baked below (replace if needed)
+        const serviceId = 'service_q6u8vzl';
+        const templateId = 'template_jpid2jq';
+
+        const templateParams = {
+          to_name: nomeParaEmail,
+          to_email: email,
+          token: token
+        };
+
+        // try sending email; fallback to showing token in UI
+        if(window.emailjs && typeof window.emailjs.send === 'function'){
+          window.emailjs.send(serviceId, templateId, templateParams)
+            .then(function(response){
+              successEl.textContent = 'E-mail de recuperação enviado. Verifique sua caixa de entrada (ou spam).';
+              successEl.classList.remove('sessao-usuario-hidden');
+              setTimeout(()=>showReset(), 1400);
+            }, function(error){
+              console.error('EmailJS error:', error);
+              successEl.textContent = 'Não foi possível enviar o e-mail automaticamente. Use este token: ' + token;
+              successEl.classList.remove('sessao-usuario-hidden');
+              setTimeout(()=>showReset(), 1400);
+            });
         } else {
-          authArea.innerHTML = `
-            <button id="btn-entrar">Entrar</button>
-            <button id="btn-registrar">Registrar</button>
-          `;
-          document.getElementById('btn-entrar').addEventListener('click', ()=>showModal('modal-entrar'));
-          document.getElementById('btn-registrar').addEventListener('click', ()=>showModal('modal-registrar'));
+          // EmailJS não carregado — exibir token para teste
+          successEl.textContent = 'EmailJS não disponível. Use este token: ' + token;
+          successEl.classList.remove('sessao-usuario-hidden');
+          setTimeout(()=>showReset(), 1400);
         }
-      }
+      });
+    }
 
-      function criarModal(id, titulo, innerHTML){
-        let m = document.createElement('div');
-        m.className='modal'; m.id=id;
-        m.innerHTML = `<div class="modal-content"><h3>${titulo}</h3>${innerHTML}</div>`;
-        document.body.appendChild(m);
-        m.addEventListener('click', e=>{ if(e.target===m) hideModal(id); });
-      }
-      function showModal(id){ document.getElementById(id).style.display='flex'; }
-      function hideModal(id){ document.getElementById(id).style.display='none'; }
+    function initResetHandlers(){
+      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
+      modal.querySelector('#sessao-usuario-to-login-3').addEventListener('click', ()=> showLogin());
+      modal.querySelector('#sessao-usuario-reset-form').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const email = modal.querySelector('#sessao-usuario-reset-email').value.trim().toLowerCase();
+        const token = modal.querySelector('#sessao-usuario-reset-token').value.trim();
+        const newPass = modal.querySelector('#sessao-usuario-reset-password').value;
+        const msgEl = modal.querySelector('#sessao-usuario-reset-msg');
+        msgEl.textContent = '';
+        if(newPass.length < 8){ msgEl.textContent = 'Senha muito curta.'; return; }
+        const stored = getResetToken(email);
+        if(!stored || stored.token !== token || stored.expiresAt < Date.now()){ msgEl.textContent = 'Token inválido ou expirado.'; return; }
+        const users = loadUsers();
+        if(!users[email]){ msgEl.textContent = 'Conta não encontrada.'; return; }
+        const {hashHex, saltHex} = await derivePasswordHash(newPass, null);
+        users[email].hashHex = hashHex;
+        users[email].saltHex = saltHex;
+        saveUsers(users);
+        removeResetToken(email);
+        setCurrent(email);
+        closeModal();
+        onAuthChange(true);
+      });
+    }
 
-      const formRegistrar = `
-        <input type="text" id="reg-nome" placeholder="Nome" />
-        <input type="email" id="reg-email" placeholder="Email" />
-        <input type="password" id="reg-senha" placeholder="Senha" />
-        <div class="actions">
-          <button id="reg-cancel">Cancelar</button>
-          <button id="reg-submit">Cadastrar</button>
-        </div>`;
-      const formEntrar = `
-        <input type="email" id="login-email" placeholder="Email" />
-        <input type="password" id="login-senha" placeholder="Senha" />
-        <div class="actions">
-          <button id="login-cancel">Cancelar</button>
-          <button id="login-submit">Entrar</button>
-        </div>`;
-      criarModal('modal-registrar','Registrar',formRegistrar);
-      criarModal('modal-entrar','Entrar',formEntrar);
+    function initProfileHandlers(){
+      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
+      modal.querySelector('#sessao-usuario-save-profile').addEventListener('click', async ()=>{
+        const nameEl = modal.querySelector('#sessao-usuario-profile-name');
+        const emailEl = modal.querySelector('#sessao-usuario-profile-email');
+        const currentPassEl = modal.querySelector('#sessao-usuario-profile-current-password');
+        const newPassEl = modal.querySelector('#sessao-usuario-profile-new-password');
+        const fileEl = modal.querySelector('#sessao-usuario-profile-photo');
+        const msgEl = modal.querySelector('#sessao-usuario-profile-msg');
+        msgEl.textContent='';
+        const newName = nameEl.value.trim();
+        const newEmail = emailEl.value.trim().toLowerCase();
+        const users = loadUsers();
+        const current = getCurrent();
+        if(!current || !users[current]){ msgEl.textContent='Erro: usuário não autenticado.'; return; }
 
-      document.addEventListener('click', e=>{
-        if(e.target.id==='reg-cancel') hideModal('modal-registrar');
-        if(e.target.id==='reg-submit'){
-          const nome=document.getElementById('reg-nome').value.trim();
-          const email=document.getElementById('reg-email').value.trim().toLowerCase();
-          const senha=document.getElementById('reg-senha').value;
-          if(!nome||!email||!senha){ alert('Preencha todos os campos'); return; }
-          let users=getUsers();
-          if(users[email]){ alert('Email já cadastrado! Use outro.'); return; }
-          // Verificar se nome já existe
-          for(let k in users){ if(users[k].nome.toLowerCase()===nome.toLowerCase()){ alert('Nome já existe! Use outro.'); return; } }
-          users[email]={nome,senha,biblioteca:[]};
-          setUsers(users);
-          setCurrentUser(email); hideModal('modal-registrar');
+        if(newEmail !== current && users[newEmail]){ msgEl.textContent='Outro usuário já usa esse e-mail.'; return; }
+
+        if(fileEl.files && fileEl.files[0]){
+          const f = fileEl.files[0];
+          const reader = new FileReader();
+          reader.onload = function(ev){
+            users[current].photoDataUrl = ev.target.result;
+            finishUpdate();
+          };
+          reader.readAsDataURL(f);
+        } else {
+          finishUpdate();
         }
-        if(e.target.id==='login-cancel') hideModal('modal-entrar');
-        if(e.target.id==='login-submit'){
-          const email=document.getElementById('login-email').value.trim().toLowerCase();
-          const senha=document.getElementById('login-senha').value;
-          let users=getUsers();
-          if(users[email] && users[email].senha===senha){ setCurrentUser(email); hideModal('modal-entrar'); }
-          else alert('Usuário ou senha incorretos');
+
+        async function finishUpdate(){
+          if(newPassEl.value){
+            if(!currentPassEl.value){ msgEl.textContent='Informe a senha atual para trocar a senha.'; return; }
+            const {saltHex, hashHex: storedHash} = users[current];
+            const {hashHex} = await derivePasswordHash(currentPassEl.value, saltHex);
+            if(hashHex !== storedHash){ msgEl.textContent='Senha atual incorreta.'; return; }
+            const newDerived = await derivePasswordHash(newPassEl.value, null);
+            users[current].hashHex = newDerived.hashHex;
+            users[current].saltHex = newDerived.saltHex;
+          }
+
+          users[current].name = newName || users[current].name;
+
+          if(newEmail !== current){
+            users[newEmail] = {...users[current], email:newEmail};
+            delete users[current];
+            saveUsers(users);
+            setCurrent(newEmail);
+          } else {
+            saveUsers(users);
+          }
+
+          msgEl.classList.remove('sessao-usuario-error');
+          msgEl.classList.add('sessao-usuario-success');
+          msgEl.textContent = 'Perfil atualizado.';
+          setTimeout(()=>{ closeModal(); onAuthChange(true); }, 900);
         }
       });
 
-      // Biblioteca
-      function renderBiblioteca(){
-        const cur = getCurrentUser();
-        if(cur){
-          bibliotecaSection.style.display='block';
-          const users=getUsers();
-          const ebooks = users[cur].biblioteca || [];
-          bibliotecaList.innerHTML = ebooks.length ? ebooks.map(id=>`<div>${id}</div>`).join('') : '<p>Você ainda não comprou nenhum eBook.</p>';
-        } else bibliotecaSection.style.display='none';
-      }
+      const logoutBtn = modal.querySelector('#sessao-usuario-logout');
+      logoutBtn.addEventListener('click', ()=>{ setCurrent(''); closeModal(); onAuthChange(false); });
 
-      // Salvar compras
-      document.querySelectorAll('.btn-comprar').forEach(btn=>{
-        btn.addEventListener('click', e=>{
-          const cur=getCurrentUser(); if(!cur) return;
-          let users=getUsers();
-          let ebookId = btn.dataset.id;
-          if(!users[cur].biblioteca.includes(ebookId)){ users[cur].biblioteca.push(ebookId); setUsers(users); renderBiblioteca(); }
+      const fileInput = modal.querySelector('#sessao-usuario-profile-photo');
+      if(fileInput){
+        fileInput.addEventListener('change', (e)=>{
+          const f = e.target.files[0];
+          if(!f) return;
+          const reader = new FileReader();
+          reader.onload = (ev)=>{
+            const img = modal.querySelector('#sessao-usuario-avatar-img');
+            img && (img.outerHTML = `<img src="${ev.target.result}" class="sessao-usuario-avatar" id="sessao-usuario-avatar-img" />`);
+          };
+          reader.readAsDataURL(f);
         });
-      });
+      }
+    }
 
-      renderAuth();
-      renderBiblioteca();
+    // --- Auth UI state changes ---
+    function onAuthChange(signedIn){
+      const current = getCurrent();
+      if(signedIn && current){
+        const users = loadUsers();
+        const u = users[current];
+        floatingBtn.textContent = u && u.name ? (u.name.split(' ')[0]) : 'Conta';
+        floatingBtn.title = 'Abrir perfil';
+        floatingBtn.onclick = showProfile;
+      } else {
+        floatingBtn.textContent = 'Minha Conta';
+        floatingBtn.title = 'Entrar / Registrar';
+        floatingBtn.onclick = ()=> showLogin();
+      }
+    }
+     // If page has element with id 'btn-minha-conta', use it instead of floating
+    const existing = document.getElementById('btn-minha-conta');
+    if(existing){
+      existing.addEventListener('click', ()=> {
+        const cur = getCurrent();
+        if(cur) showProfile(); else showLogin();
+      });
+      floatingBtn.style.display = 'none';
+    }
+
+    // initialize
+    (function init(){
+      overlay.querySelectorAll('.sessao-usuario-close').forEach(b=>b.addEventListener('click', closeModal));
+      const cur = getCurrent();
+      onAuthChange(!!cur);
+    })();
+
+    // expose helper
+    window.SessaoUsuarioLocal = {
+      openLogin: ()=> showLogin(),
+      openSignup: ()=> showSignup(),
+      openProfile: ()=> showProfile(),
+      isAuthenticated: ()=> !!getCurrent(),
+      getCurrentUser: ()=>{
+        const cur = getCurrent();
+        const users = loadUsers();
+        return cur && users[cur] ? {...users[cur], hashHex:undefined, saltHex:undefined} : null;
+      }
+    };
+
+  })();
+  </script>
+
+  <!-- EmailJS SDK + init (usando sua public key) -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    // inicializa emailjs com sua public key (já fornecida)
+    (function(){
+      if(window.emailjs && typeof window.emailjs.init === 'function'){
+        window.emailjs.init('rljVhYiVragsliOtX');
+      } else {
+        console.warn('EmailJS não carregado corretamente. Verifique conexão.');
+      }
     })();
   </script>
+
 </body>
 </html>
+
