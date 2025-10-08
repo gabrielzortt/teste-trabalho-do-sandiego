@@ -675,18 +675,39 @@
 
   })();
   </script>
+  <!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-  <!-- EmailJS SDK + init (usando sua public key) -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    // inicializa emailjs com sua public key (já fornecida)
-    (function(){
-      if(window.emailjs && typeof window.emailjs.init === 'function'){
-        window.emailjs.init('rljVhYiVragsliOtX');
+<script>
+  // Inicializa o EmailJS
+  emailjs.init("rljVhYiVragsliOtX"); // <-- Cole sua Public Key aqui
+
+  async function enviarTokenEmail(nomeUsuario, emailUsuario, tokenGerado) {
+    try {
+      const resposta = await emailjs.send(
+        "service_q6u8vzl,     // <-- Cole seu Service ID aqui
+        "template_jpid2jq",    // <-- Cole seu Template ID aqui
+        {
+          user_name: nomeUsuario,
+          user_email: emailUsuario,
+          reset_token: tokenGerado
+        }
+      );
+
+      if (resposta.status === 200) {
+        alert("✅ E-mail de recuperação enviado com sucesso!");
       } else {
-        console.warn('EmailJS não carregado corretamente. Verifique conexão.');
+        alert("⚠️ Não foi possível enviar o e-mail. Código: " + resposta.status);
       }
-    })();
+    } catch (erro) {
+      console.error("Erro ao enviar e-mail:", erro);
+      alert("❌ Ocorreu um erro ao enviar o e-mail. Verifique sua conexão ou configuração do EmailJS.");
+    }
+  }
+
+  // Exemplo de uso
+  // enviarTokenEmail("Gabriel", "exemplo@gmail.com", "ABCD1234");
+</script>
   </script>
 
 </body>
