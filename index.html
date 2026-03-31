@@ -50,13 +50,13 @@
             </h1>
             
             <div class="relative w-full md:w-96">
-                <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Buscar perfume por nome ou marca..." class="w-full bg-gray-50 border border-gray-200 rounded-full py-2 pl-5 pr-12 text-sm focus:border-gold focus:ring-1 focus:ring-gold outline-none transition">
+                <input type="text" id="search-input" onkeyup="window.searchProducts()" placeholder="Buscar perfume por nome ou marca..." class="w-full bg-gray-50 border border-gray-200 rounded-full py-2 pl-5 pr-12 text-sm focus:border-gold focus:ring-1 focus:ring-gold outline-none transition">
                 <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gold">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
 
-            <button onclick="toggleCart()" class="relative p-2 group transition duration-300">
+            <button onclick="window.toggleCart()" class="relative p-2 group transition duration-300">
                 <i class="fas fa-shopping-bag text-2xl group-hover:text-gold transition-colors"></i>
                 <span id="cart-count" class="absolute top-0 right-0 bg-gold text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-md">0</span>
             </button>
@@ -77,7 +77,7 @@
         <div id="no-results" class="hidden text-center py-20 text-gray-500 flex flex-col items-center gap-4">
             <i class="fas fa-search text-5xl opacity-30"></i>
             <p class="text-xl font-light">Nenhum perfume corresponde à sua busca.</p>
-            <button onclick="clearSearch()" class="text-gold hover:underline">Limpar busca</button>
+            <button onclick="window.clearSearch()" class="text-gold hover:underline">Limpar busca</button>
         </div>
 
         <div id="section-boticario" class="mb-20 product-section">
@@ -107,12 +107,12 @@
         </div>
     </footer>
 
-    <div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="cart-overlay" onclick="window.toggleCart()" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
     
     <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-500 z-50 flex flex-col">
         <div class="px-6 py-5 bg-white border-b flex justify-between items-center">
             <h2 class="text-2xl font-serif text-midnight">Sua Sacola</h2>
-            <button onclick="toggleCart()" class="text-gray-400 hover:text-gold transition-colors duration-300 text-xl"><i class="fas fa-times"></i></button>
+            <button onclick="window.toggleCart()" class="text-gray-400 hover:text-gold transition-colors duration-300 text-xl"><i class="fas fa-times"></i></button>
         </div>
         
         <div id="cart-items" class="p-6 flex-1 overflow-y-auto flex flex-col gap-6">
@@ -123,30 +123,56 @@
                 <span>Total</span>
                 <span id="cart-total">R$ 0,00</span>
             </div>
-            <button onclick="checkout()" class="w-full bg-midnight text-white uppercase tracking-widest text-sm py-4 rounded-sm hover:bg-gold transition-colors duration-500 shadow-lg">
+            <button onclick="window.checkout()" class="w-full bg-midnight text-white uppercase tracking-widest text-sm py-4 rounded-sm hover:bg-gold transition-colors duration-500 shadow-lg">
                 Finalizar no WhatsApp
             </button>
         </div>
     </div>
 
-    <script>
-        // Puxar produtos do localStorage (ou array vazio se não houver nada)
-        let products = JSON.parse(localStorage.getItem('perfume_products')) || [];
-        
-        // Se a loja estiver vazia na primeira vez, adiciona produtos padrão com imagem base64
-        if (products.length === 0) {
-            products = [
-                { id: 1, name: "Floratta Simple Love", brand: "boticario", price: 139.90, stock: 5, image: "" },
-                { id: 2, name: "Malbec Gold", brand: "boticario", price: 199.90, stock: 2, image: "" },
-                { id: 3, name: "Good Girl (Inspirado)", brand: "brand", price: 89.90, stock: 10, image: "" },
-                { id: 4, name: "Elysée Nuit", brand: "boticario", price: 259.00, stock: 0, image: "" }
-            ];
-            localStorage.setItem('perfume_products', JSON.stringify(products));
-        }
+    <script type="module">
+        // 1. Importando o Firebase atualizado (versão 12.11.0)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
+        // 2. A sua configuração oficial
+        const firebaseConfig = {
+            apiKey: "AIzaSyBBzLjq-FsBI7nK97MvF_-FMNEDDakbs3o",
+            authDomain: "elegance-perfum.firebaseapp.com",
+            projectId: "elegance-perfum",
+            storageBucket: "elegance-perfum.firebasestorage.app",
+            messagingSenderId: "12599337514",
+            appId: "1:12599337514:web:b83c321202fc48ba73d953"
+        };
+
+        // 3. Inicializando o Firebase e o Banco de Dados (Firestore)
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Nossas listas (agora o array de produtos começa vazio até o Firebase mandar os dados)
+        let products = [];
         let cart = [];
 
-        function renderProducts(productsToRender = products) {
+        // 4. OLHEIRO DO FIREBASE: Fica monitorando a coleção "produtos"
+        onSnapshot(collection(db, "produtos"), (snapshot) => {
+            products = [];
+            snapshot.forEach((doc) => {
+                // Pega o ID único que o Firebase gera e junta com os dados (nome, preço, etc)
+                products.push({ id: doc.id, ...doc.data() }); 
+            });
+            
+            // Assim que os produtos chegarem (ou se algo for editado), re-renderiza a tela
+            window.renderProducts(products);
+            
+            // Garante que se um produto for deletado no banco, ele saia do carrinho do cliente
+            cart = cart.filter(cartItem => products.some(p => p.id === cartItem.id));
+            window.updateCart(); 
+        });
+
+        // ==============================================================
+        // FUNÇÕES DA LOJA (Colocamos no 'window' porque estamos usando type="module")
+        // ==============================================================
+
+        window.renderProducts = function(productsToRender = products) {
             const gridBot = document.getElementById('grid-boticario');
             const gridBrand = document.getElementById('grid-brand');
             const noResults = document.getElementById('no-results');
@@ -161,8 +187,8 @@
             productsToRender.forEach(p => {
                 const isEsgotado = p.stock <= 0;
                 
-                // Define a imagem: Usa a base64 salva OU o placeholder "sem imagem"
-                const imageHtml = p.image 
+                // Define a imagem: Usa a URL do Firebase OU o placeholder
+                const imageHtml = p.image && p.image !== "" 
                     ? `<img src="${p.image}" alt="${p.name}" class="product-image transform group-hover:scale-105 transition-transform duration-700">`
                     : `<span class="text-gray-400 font-serif tracking-widest text-xs uppercase transform group-hover:scale-110 transition-transform duration-700 p-4 text-center">sem imagem</span>`;
 
@@ -180,7 +206,7 @@
                             <div class="mt-auto">
                                 ${isEsgotado 
                                     ? '<button disabled class="w-full border border-gray-200 text-gray-400 py-2.5 uppercase tracking-widest text-xs cursor-not-allowed rounded-sm">Indisponível</button>' 
-                                    : `<button onclick="addToCart(${p.id})" class="w-full bg-white border border-midnight text-midnight py-2.5 uppercase tracking-widest text-xs hover:bg-midnight hover:text-white transition-all duration-300 rounded-sm">Adicionar à Sacola</button>`}
+                                    : `<button onclick="window.addToCart('${p.id}')" class="w-full bg-white border border-midnight text-midnight py-2.5 uppercase tracking-widest text-xs hover:bg-midnight hover:text-white transition-all duration-300 rounded-sm">Adicionar à Sacola</button>`}
                             </div>
                         </div>
                     </div>
@@ -195,36 +221,33 @@
                 }
             });
 
-            // Exibe/Oculta seções e mensagem de "sem resultados"
             sectionBot.classList.toggle('hidden', countBot === 0);
             sectionBrand.classList.toggle('hidden', countBrand === 0);
             noResults.classList.toggle('hidden', productsToRender.length > 0);
         }
 
-        // FUNÇÃO DE BUSCA TURBINADA COM STRING
-        function searchProducts() {
+        window.searchProducts = function() {
             const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
             
             if (searchTerm === "") {
-                renderProducts(products); // Mostra tudo se busca vazia
+                window.renderProducts(products);
                 return;
             }
 
-            // Filtra produtos comparando nome OU marca com a string digitada
             const filteredProducts = products.filter(p => 
                 p.name.toLowerCase().includes(searchTerm) || 
                 p.brand.toLowerCase().includes(searchTerm)
             );
             
-            renderProducts(filteredProducts);
+            window.renderProducts(filteredProducts);
         }
 
-        function clearSearch() {
+        window.clearSearch = function() {
             document.getElementById('search-input').value = '';
-            searchProducts();
+            window.searchProducts();
         }
 
-        function toggleCart() {
+        window.toggleCart = function() {
             const sidebar = document.getElementById('cart-sidebar');
             const overlay = document.getElementById('cart-overlay');
             
@@ -239,7 +262,7 @@
             }
         }
 
-        function addToCart(id) {
+        window.addToCart = function(id) {
             const product = products.find(p => p.id === id);
             if(product && product.stock > 0) {
                 const item = cart.find(i => i.id === id);
@@ -248,25 +271,32 @@
                     else alert('Estoque máximo atingido para este item.');
                 } else {
                     cart.push({...product, qtd: 1});
-                    // Feedback visual simples
+                    
                     const btn = event.currentTarget;
-                    const originalText = btn.innerText;
-                    btn.innerText = "Adicionado ✓";
-                    btn.classList.replace('bg-white', 'bg-gold');
-                    btn.classList.replace('text-midnight', 'text-white');
-                    btn.classList.replace('border-midnight', 'border-gold');
-                    setTimeout(() => {
-                        btn.innerText = originalText;
-                        btn.classList.replace('bg-gold', 'bg-white');
-                        btn.classList.replace('text-white', 'text-midnight');
-                        btn.classList.replace('border-gold', 'border-midnight');
-                    }, 1500);
+                    if(btn) {
+                        const originalText = btn.innerText;
+                        btn.innerText = "Adicionado ✓";
+                        btn.classList.replace('bg-white', 'bg-gold');
+                        btn.classList.replace('text-midnight', 'text-white');
+                        btn.classList.replace('border-midnight', 'border-gold');
+                        setTimeout(() => {
+                            btn.innerText = originalText;
+                            btn.classList.replace('bg-gold', 'bg-white');
+                            btn.classList.replace('text-white', 'text-midnight');
+                            btn.classList.replace('border-gold', 'border-midnight');
+                        }, 1500);
+                    }
                 }
-                updateCart();
+                window.updateCart();
             }
         }
 
-        function updateCart() {
+        window.removeFromCart = function(index) {
+            cart.splice(index, 1);
+            window.updateCart();
+        }
+
+        window.updateCart = function() {
             const container = document.getElementById('cart-items');
             let total = 0;
             let count = 0;
@@ -283,7 +313,7 @@
                     total += item.price * item.qtd;
                     count += item.qtd;
                     
-                    const imgInCart = item.image 
+                    const imgInCart = item.image && item.image !== "" 
                         ? `<img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-contain p-1 border rounded-sm">`
                         : `<div class="w-16 h-16 bg-gray-100 rounded-sm flex items-center justify-center text-[8px] text-gray-400 font-serif uppercase text-center p-1 border">sem<br>imagem</div>`;
 
@@ -295,7 +325,7 @@
                                 <p class="text-xs text-gray-500 mt-1">Qtd: ${item.qtd}</p>
                                 <p class="text-sm font-semibold text-gold mt-1">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
                             </div>
-                            <button onclick="cart.splice(${index}, 1); updateCart()" class="text-gray-300 hover:text-red-500 transition-colors p-2"><i class="fas fa-trash"></i></button>
+                            <button onclick="window.removeFromCart(${index})" class="text-gray-300 hover:text-red-500 transition-colors p-2"><i class="fas fa-trash"></i></button>
                         </div>
                     `;
                 });
@@ -305,7 +335,7 @@
             document.getElementById('cart-count').innerText = count;
         }
 
-        function checkout() {
+        window.checkout = function() {
             if(cart.length === 0) return alert('Sua sacola está vazia!');
             
             let text = "✨ Olá! Gostaria de fazer o seguinte pedido na *Elegance Perfumes*:%0A%0A";
@@ -318,12 +348,9 @@
             
             text += `%0A💎 *Total do Pedido: R$ ${total.toFixed(2).replace('.', ',')}*%0A%0AAguardo o retorno para combinar a entrega/pagamento!`;
             
-            const numero = "5592994246242";
+            const numero = "5592994246242"; 
             window.open(`https://wa.me/${numero}?text=${text}`, '_blank');
         }
-
-        // Iniciar a loja
-        renderProducts();
     </script>
 </body>
 </html>
