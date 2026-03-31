@@ -1,715 +1,329 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Venda de eBooks - Creators of the Future</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- NOTE: EmailJS SDK será carregado no final (parte 3) -->
-</head>
-<body>
-  <!-- Barra de pesquisa -->
-  <header>
-    <div class="search-container">
-      <input type="text" class="search-bar" placeholder="Pesquisar produtos..." />
-    </div>
-  </header>
-
-  <!-- Produto não encontrado -->
-  <div id="sem-produto" style="display:none; text-align:center; margin-top:20px;">
-    <h2>Produto não identificado</h2>
-  </div>
-
-  <!-- Seção Quem Somos -->
-  <section id="quem-somos">
-    <h2>Quem Somos</h2>
-    <img src="https://github.com/gabrielzortt/Venda-de-Ebook/blob/main/05552d41-df4b-4b4a-abd2-0991d4e63a57.jpg?raw=true" 
-         alt="Logo Creators of the Future" 
-         class="logo-quem-somos" />
-    <p>
-      Na <strong>Creators of the Future</strong>, acreditamos que o conhecimento é a chave para a liberdade financeira e para a realização pessoal. Nossa missão é transformar vidas, oferecendo conteúdos práticos e objetivos que capacitam jovens e microempreendedores a conquistar seus sonhos no mundo digital.  
-      <br><br>
-      Com anos de experiência no mercado digital, reunimos as melhores estratégias, técnicas e ferramentas em nossos eBooks, garantindo que você aprenda de forma rápida, eficiente e segura. Aqui, você não encontra teorias vazias, mas métodos testados que realmente funcionam.  
-      <br><br>
-      Junte-se a nós e descubra como transformar ideias em resultados, desafios em oportunidades e potencial em sucesso. Estamos aqui para guiá-lo em cada passo da sua jornada empreendedora, para que você possa construir um futuro sólido, próspero e cheio de realizações!
-    </p>
-  </section>
-
-  <!-- Seção de Produtos -->
-  <section class="outros-ebooks">
-    <h2>eBook em Destaque</h2>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance Perfumes | Alta Perfumaria Turbinada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- Produto real com imagem -->
-    <div class="produto destaque">
-      <img src="https://raw.githubusercontent.com/gabrielzortt/Venda-de-Ebook/refs/heads/main/capa.jpg" 
-           alt="Como Ganhar Dinheiro com o Celular" />
-      <div class="produto-info">
-        <h3>📱 Como Ganhar Dinheiro com o Celular</h3>
-        <p>Aprenda métodos práticos e testados para começar a ganhar dinheiro com seu celular ainda hoje!</p>
-        <div class="valor">💰 R$ 19,90</div>
-        <button onclick="window.location.href='https://pay.kiwify.com.br/QHHVus7';">
-          📲 Comprar Agora
-        </button>
-      </div>
-    </div>
-    <h2>Outros eBooks</h2>
-    <div class="grid-produtos">
-      <!-- Produto 2 sem imagem -->
-      <div class="produto">
-        <div class="produto-info">
-          <h3>💻 Empreendedorismo Digital para Iniciantes</h3>
-          <p>Aprenda a criar e gerir seu próprio negócio digital com baixo investimento inicial!</p>
-          <div class="valor">💰 R$ 29,90</div>
-          <button>📲 Comprar Agora</button>
-        </div>
-      </div>
-
-      <!-- Produto 3 sem imagem -->
-      <div class="produto">
-        <div class="produto-info">
-          <h3>📊 Investindo para Iniciantes - Comece com R$ 100</h3>
-          <p>Descubra como investir de forma segura mesmo com pouco dinheiro. Ideal para iniciantes!</p>
-          <div class="valor">💰 R$ 19,90</div>
-          <button>📲 Comprar Agora</button>
-        </div>
-      </div>
-
-      <!-- Produto 4 sem imagem -->
-      <div class="produto">
-        <div class="produto-info">
-          <h3>💻 Vendas Online - Como Criar Seu Negócio</h3>
-          <p>Saiba como construir uma loja virtual, fazer anúncios e gerar vendas de forma automatizada.</p>
-          <div class="valor">💰 R$ 39,90</div>
-          <button>📲 Comprar Agora</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Seção de Dúvidas Frequentes -->
-  <section id="duvidas">
-    <h2>Dúvidas Frequentes</h2>
-    <div class="faq">
-      <div class="pergunta">
-        <h4>❓ Como faço para acessar o eBook após a compra?</h4>
-        <p>Após a confirmação do pagamento, você receberá um link para download em seu e-mail.</p>
-      </div>
-      <div class="pergunta">
-        <h4>❓ Posso ler os eBooks no celular e no computador?</h4>
-        <p>Sim! Nossos eBooks são compatíveis com todos os dispositivos, incluindo smartphones, tablets e computadores.</p>
-      </div>
-      <div class="pergunta">
-        <h4>❓ Existe garantia de satisfação?</h4>
-        <p>Sim, oferecemos 7 dias para solicitar reembolso caso não esteja satisfeito com o conteúdo.</p>
-      </div>
-      <div class="pergunta">
-        <h4>❓ Os métodos ensinados realmente funcionam?</h4>
-        <p>Sim! Todos os métodos são testados e comprovados por nossos especialistas no mercado digital.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Seção de Avaliações -->
-  <section id="avaliacoes">
-    <h2>Avaliações dos Usuários</h2>
-    <div class="avaliacoes-geral">
-      <div class="avaliacao">
-        <h4>Lucas M.</h4>
-        <p>Excelente conteúdo! Consegui aplicar as técnicas e já vi resultados no primeiro mês. Recomendo!</p>
-        <span>⭐⭐⭐⭐⭐</span>
-      </div>
-      <div class="avaliacao">
-        <h4>Julia T.</h4>
-        <p>O eBook é incrível, muito prático e fácil de entender. As dicas realmente funcionam.</p>
-        <span>⭐⭐⭐⭐⭐</span>
-      </div>
-      <div class="avaliacao">
-        <h4>Carlos P.</h4>
-        <p>Aprendi muito em pouco tempo. Material de alta qualidade e bem explicado.</p>
-        <span>⭐⭐⭐⭐⭐</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Seção de Ajuda -->
-  <section id="ajuda">
-    <h2>Precisa de Ajuda?</h2>
-    <p>Se tiver qualquer dúvida ou problema, entre em contato conosco pelo telefone:</p>
-    <p class="telefone">📞 (92) 99427-4276</p>
-  </section>
-
-  <!-- Rodapé -->
-  <footer>
-    <p>&copy; 2025 Creators of the Future - Todos os direitos reservados.</p>
-  </footer>
-
-  <!-- Scripts principais do site -->
-  <script>
-    // FAQ interativo com animação
-    const perguntas = document.querySelectorAll('.faq .pergunta');
-    perguntas.forEach(pergunta => {
-      pergunta.addEventListener('click', () => {
-        const resposta = pergunta.querySelector('p');
-        if(resposta.style.display === 'block'){
-          resposta.style.display = 'none';
-          pergunta.classList.remove('ativo');
-        } else {
-          resposta.style.display = 'block';
-          pergunta.classList.add('ativo');
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: { 
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    colors: { 
+                        gold: { DEFAULT: '#D4AF37', light: '#F9F1D8' },
+                        midnight: '#0A0A0A'
+                    } 
+                }
+            }
         }
-      });
-    });
-
-    // Pesquisa com filtro e produto não identificado
-    const searchInput = document.querySelector(".search-bar");
-    const produtos = document.querySelectorAll(".produto");
-    const quemSomos = document.getElementById("quem-somos");
-    const outrosEbooks = document.querySelector(".outros-ebooks");
-    const duvidas = document.getElementById("duvidas");
-    const avaliacoes = document.getElementById("avaliacoes");
-    const ajuda = document.getElementById("ajuda");
-    const semProduto = document.getElementById("sem-produto");
-
-    function filtrarProdutos() {
-      const termo = searchInput.value.toLowerCase();
-      let encontrado = false;
-
-      produtos.forEach(produto => {
-        const texto = produto.innerText.toLowerCase();
-        if (texto.includes(termo)) {
-          produto.style.display = "flex";
-          encontrado = true;
-        } else {
-          produto.style.display = "none";
+    </script>
+    <style>
+        /* Efeito de rolagem suave */
+        html { scroll-behavior: smooth; }
+        /* Barra de rolagem elegante */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+        
+        /* Ajuste para imagens de produto ficarem contidas */
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Garante que a imagem inteira apareça sem cortar */
+            padding: 1rem; /* Espaçamento interno para não grudar nas bordas */
         }
-      });
+    </style>
+</head>
+<body class="bg-[#FAFAFA] text-gray-800 font-sans antialiased selection:bg-gold selection:text-white">
 
-      if (termo === "") {
-        // Campo vazio: mostrar tudo
-        quemSomos.style.display = "block";
-        outrosEbooks.style.display = "block";
-        duvidas.style.display = "block";
-        avaliacoes.style.display = "block";
-        ajuda.style.display = "block";
-        semProduto.style.display = "none";
-        produtos.forEach(p => p.style.display = "flex");
-      } else if (!encontrado) {
-        // Produto não encontrado
-        quemSomos.style.display = "none";
-        outrosEbooks.style.display = "none";
-        duvidas.style.display = "none";
-        avaliacoes.style.display = "none";
-        ajuda.style.display = "none";
-        semProduto.style.display = "block";
-      } else {
-        // Produto encontrado
-        quemSomos.style.display = "none";
-        outrosEbooks.style.display = "block";
-        duvidas.style.display = "none";
-        avaliacoes.style.display = "none";
-        ajuda.style.display = "none";
-        semProduto.style.display = "none";
-      }
-    }
-
-    searchInput.addEventListener("input", filtrarProdutos);
-  </script>
-
-  <!-- CSS isolado para a sessão de usuário (não altera seu style.css) -->
-  <style>
-    /* CSS isolado para a sessão de usuário - prefixo sessao-usuario- */
-    .sessao-usuario-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;z-index:99999}
-    .sessao-usuario-modal{background:#fff;border-radius:12px;max-width:520px;width:96%;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.25);font-family:inherit}
-    .sessao-usuario-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-    .sessao-usuario-title{font-size:18px;font-weight:700}
-    .sessao-usuario-close{background:transparent;border:0;font-size:22px;cursor:pointer}
-    .sessao-usuario-form{display:flex;flex-direction:column;gap:10px}
-    .sessao-usuario-input{padding:10px;border-radius:8px;border:1px solid #ddd;font-size:14px;width:100%}
-    .sessao-usuario-btn{padding:10px 14px;border-radius:8px;border:0;background:#1a237e;color:#fff;font-weight:700;cursor:pointer}
-    .sessao-usuario-secondary{background:transparent;color:#1a237e;border:1px solid #1a237e}
-    .sessao-usuario-note{font-size:13px;color:#666}
-    .sessao-usuario-flex{display:flex;gap:10px;align-items:center}
-    .sessao-usuario-avatar{width:72px;height:72px;border-radius:10px;object-fit:cover;border:1px solid #eee}
-    .sessao-usuario-footer{margin-top:10px;display:flex;justify-content:space-between;align-items:center}
-    .sessao-usuario-floating{position:fixed;right:18px;bottom:18px;background:#111;color:#fff;padding:12px 14px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.25);z-index:99998;cursor:pointer;font-weight:700;border:0}
-    .sessao-usuario-link{background:none;border:0;color:#1a237e;cursor:pointer;font-size:14px;padding:0}
-    .sessao-usuario-hidden{display:none}
-    .sessao-usuario-error{color:#b00020;font-size:13px}
-    .sessao-usuario-success{color:green;font-size:13px}
-    @media (max-width:480px){
-      .sessao-usuario-modal{padding:14px}
-      .sessao-usuario-avatar{width:56px;height:56px}
-    }
-  </style>
-
-  <div id="sessao-usuario-root"></div>
-  <script>
-  (function(){
-    // --- Helpers criptográficos (Web Crypto) ---
-    const textEncoder = new TextEncoder();
-
-    function toHex(buffer){
-      return Array.from(new Uint8Array(buffer)).map(b=>b.toString(16).padStart(2,'0')).join('');
-    }
-    function fromHex(hex){
-      const bytes = new Uint8Array(hex.length/2);
-      for(let i=0;i<bytes.length;i++) bytes[i]=parseInt(hex.substr(i*2,2),16);
-      return bytes.buffer;
-    }
-    async function derivePasswordHash(password, saltHex, iterations=120000){
-      const salt = saltHex ? new Uint8Array(fromHex(saltHex)) : crypto.getRandomValues(new Uint8Array(16));
-      const keyMaterial = await crypto.subtle.importKey('raw', textEncoder.encode(password), {name:'PBKDF2'}, false, ['deriveBits']);
-      const derived = await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations,hash:'SHA-256'}, keyMaterial, 256);
-      return {hashHex: toHex(derived), saltHex: toHex(salt)};
-    }
-
-    // --- Storage helpers ---
-    function loadUsers(){ try { return JSON.parse(localStorage.getItem('sessao_users')||'{}'); } catch(e){ return {}; } }
-    function saveUsers(obj){ localStorage.setItem('sessao_users', JSON.stringify(obj)); }
-    function setCurrent(email){ localStorage.setItem('sessao_current', email || ''); }
-    function getCurrent(){ return localStorage.getItem('sessao_current') || ''; }
-    function saveResetToken(email, token, expiresAt){
-      const tokens = JSON.parse(localStorage.getItem('sessao_reset_tokens')||'{}');
-      tokens[email] = {token, expiresAt};
-      localStorage.setItem('sessao_reset_tokens', JSON.stringify(tokens));
-    }
-    function getResetToken(email){
-      const tokens = JSON.parse(localStorage.getItem('sessao_reset_tokens')||'{}');
-      return tokens[email] || null;
-    }
-    function removeResetToken(email){
-      const tokens = JSON.parse(localStorage.getItem('sessao_reset_tokens')||'{}');
-      delete tokens[email];
-      localStorage.setItem('sessao_reset_tokens', JSON.stringify(tokens));
-    }
-
-    // --- UI injection ---
-    const root = document.getElementById('sessao-usuario-root');
-    root.innerHTML = `
-      <button id="sessao-usuario-floating" class="sessao-usuario-floating" title="Minha Conta">Minha Conta</button>
-      <div id="sessao-usuario-overlay" class="sessao-usuario-overlay" aria-hidden="true">
-        <div class="sessao-usuario-modal" role="dialog" aria-modal="true" id="sessao-usuario-modal"></div>
-      </div>
-    `;
-
-    const overlay = document.getElementById('sessao-usuario-overlay');
-    const modal = document.getElementById('sessao-usuario-modal');
-    const floatingBtn = document.getElementById('sessao-usuario-floating');
-
-    function openModal(html){ modal.innerHTML = html; overlay.style.display='flex'; overlay.setAttribute('aria-hidden','false'); }
-    function closeModal(){ overlay.style.display='none'; overlay.setAttribute('aria-hidden','true'); }
-    overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
-
-    // --- Templates ---
-    function loginTemplate(msg=''){
-      return `
-        <div class="sessao-usuario-header">
-          <div class="sessao-usuario-title">Entrar</div>
-          <button class="sessao-usuario-close" data-action="close">&times;</button>
-        </div>
-        <form id="sessao-usuario-login" class="sessao-usuario-form">
-          <input class="sessao-usuario-input" id="sessao-usuario-login-email" placeholder="E-mail" type="email" required />
-          <input class="sessao-usuario-input" id="sessao-usuario-login-password" placeholder="Senha" type="password" required />
-          <div class="sessao-usuario-error" id="sessao-usuario-login-msg">${msg}</div>
-          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
-            <button class="sessao-usuario-btn" type="submit">Entrar</button>
-            <button type="button" class="sessao-usuario-link" id="sessao-usuario-to-signup">Criar conta</button>
-          </div>
-          <div class="sessao-usuario-footer">
-            <button type="button" class="sessao-usuario-link" id="sessao-usuario-forgot">Esqueci a senha</button>
-          </div>
-        </form>
-      `;
-    }
-
-    function signupTemplate(msg=''){
-      return `
-        <div class="sessao-usuario-header">
-          <div class="sessao-usuario-title">Criar Conta</div>
-          <button class="sessao-usuario-close" data-action="close">&times;</button>
-        </div>
-        <form id="sessao-usuario-signup" class="sessao-usuario-form">
-          <input class="sessao-usuario-input" id="sessao-usuario-signup-name" placeholder="Nome completo" type="text" required />
-          <input class="sessao-usuario-input" id="sessao-usuario-signup-email" placeholder="E-mail" type="email" required />
-          <input class="sessao-usuario-input" id="sessao-usuario-signup-password" placeholder="Senha (mín 8 caracteres)" type="password" required />
-          <div class="sessao-usuario-note sessao-usuario-small">Você poderá adicionar foto depois no perfil.</div>
-          <div class="sessao-usuario-error" id="sessao-usuario-signup-msg">${msg}</div>
-          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
-            <button class="sessao-usuario-btn" type="submit">Cadastrar</button>
-            <button type="button" class="sessao-usuario-link" id="sessao-usuario-to-login">Já tenho conta</button>
-          </div>
-        </form>
-      `;
-    }
-    function forgotTemplate(){
-      return `
-        <div class="sessao-usuario-header">
-          <div class="sessao-usuario-title">Recuperar Senha</div>
-          <button class="sessao-usuario-close" data-action="close">&times;</button>
-        </div>
-        <form id="sessao-usuario-forgot-form" class="sessao-usuario-form">
-          <input class="sessao-usuario-input" id="sessao-usuario-forgot-email" placeholder="Digite seu e-mail" type="email" required />
-          <div class="sessao-usuario-note">Será gerado um token de recuperação. Um e-mail será enviado para o endereço informado.</div>
-          <div class="sessao-usuario-success sessao-usuario-hidden" id="sessao-usuario-forgot-success"></div>
-          <div class="sessao-usuario-error" id="sessao-usuario-forgot-msg"></div>
-          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
-            <button class="sessao-usuario-btn" type="submit">Gerar token</button>
-            <button class="sessao-usuario-link" type="button" id="sessao-usuario-to-login-2">Voltar</button>
-          </div>
-        </form>
-      `;
-    }
-
-    function resetTemplate(){
-      return `
-        <div class="sessao-usuario-header">
-          <div class="sessao-usuario-title">Resetar Senha</div>
-          <button class="sessao-usuario-close" data-action="close">&times;</button>
-        </div>
-        <form id="sessao-usuario-reset-form" class="sessao-usuario-form">
-          <input class="sessao-usuario-input" id="sessao-usuario-reset-email" placeholder="E-mail" type="email" required />
-          <input class="sessao-usuario-input" id="sessao-usuario-reset-token" placeholder="Token de recuperação" type="text" required />
-          <input class="sessao-usuario-input" id="sessao-usuario-reset-password" placeholder="Nova senha" type="password" required />
-          <div class="sessao-usuario-error" id="sessao-usuario-reset-msg"></div>
-          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
-            <button class="sessao-usuario-btn" type="submit">Resetar senha</button>
-            <button class="sessao-usuario-link" type="button" id="sessao-usuario-to-login-3">Voltar</button>
-          </div>
-        </form>
-      `;
-    }
-
-    function profileTemplate(user){
-      const photoHtml = user.photoDataUrl ? `<img src="${user.photoDataUrl}" class="sessao-usuario-avatar" id="sessao-usuario-avatar-img" />` : `<div style="width:72px;height:72px;border-radius:10px;background:#f1f1f1;display:flex;align-items:center;justify-content:center;color:#666" id="sessao-usuario-avatar-img">Sem foto</div>`;
-      return `
-        <div class="sessao-usuario-header">
-          <div class="sessao-usuario-title">Minha Conta</div>
-          <button class="sessao-usuario-close" data-action="close">&times;</button>
-        </div>
-        <div class="sessao-usuario-form" id="sessao-usuario-profile-form">
-          <div class="sessao-usuario-flex">
-            ${photoHtml}
-            <div style="flex:1">
-              <input class="sessao-usuario-input" id="sessao-usuario-profile-name" value="${user.name || ''}" placeholder="Nome completo" />
-              <input class="sessao-usuario-input" id="sessao-usuario-profile-email" value="${user.email || ''}" placeholder="E-mail" />
-              <label class="sessao-usuario-note">Alterar foto: <input type="file" id="sessao-usuario-profile-photo" accept="image/*" /></label>
+    <header class="bg-white/90 backdrop-blur-sm text-midnight sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+        <div class="container mx-auto px-4 md:px-6 py-3 flex flex-col md:flex-row gap-4 justify-between items-center">
+            <h1 class="text-3xl font-serif font-bold tracking-widest uppercase text-midnight">
+                Elegance
+            </h1>
+            
+            <div class="relative w-full md:w-96">
+                <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Buscar perfume por nome ou marca..." class="w-full bg-gray-50 border border-gray-200 rounded-full py-2 pl-5 pr-12 text-sm focus:border-gold focus:ring-1 focus:ring-gold outline-none transition">
+                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gold">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
-          </div>
 
-          <hr />
-
-          <div class="sessao-usuario-note">Alterar senha</div>
-          <input class="sessao-usuario-input" id="sessao-usuario-profile-current-password" placeholder="Senha atual (necessário para trocar)" type="password" />
-          <input class="sessao-usuario-input" id="sessao-usuario-profile-new-password" placeholder="Nova senha" type="password" />
-          <div class="sessao-usuario-error" id="sessao-usuario-profile-msg"></div>
-
-          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
-            <button class="sessao-usuario-link" id="sessao-usuario-logout">Sair</button>
-            <button class="sessao-usuario-btn" id="sessao-usuario-save-profile">Salvar</button>
-          </div>
+            <button onclick="toggleCart()" class="relative p-2 group transition duration-300">
+                <i class="fas fa-shopping-bag text-2xl group-hover:text-gold transition-colors"></i>
+                <span id="cart-count" class="absolute top-0 right-0 bg-gold text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-md">0</span>
+            </button>
         </div>
-      `;
-    }
+    </header>
 
-    // --- Actions & Handlers ---
-    function showLogin(msg=''){ openModal(loginTemplate(msg)); initLoginHandlers(); }
-    function showSignup(msg=''){ openModal(signupTemplate(msg)); initSignupHandlers(); }
-    function showForgot(){ openModal(forgotTemplate()); initForgotHandlers(); }
-    function showReset(){ openModal(resetTemplate()); initResetHandlers(); }
-    function showProfile(){ 
-      const users = loadUsers();
-      const current = getCurrent();
-      if(!current || !users[current]){ showLogin(); return; }
-      openModal(profileTemplate({name:users[current].name, email: users[current].email, photoDataUrl: users[current].photoDataUrl}));
-      initProfileHandlers();
-    }
+    <section class="relative bg-midnight text-white py-24 flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
+        <div class="relative z-10 text-center px-4 max-w-3xl">
+            <span class="text-gold uppercase tracking-[0.3em] text-sm font-semibold mb-3 block">A Arte da Perfumaria</span>
+            <h2 class="text-4xl md:text-6xl font-serif mb-5 leading-tight">Desperte sua <br/><span class="italic text-gold">essência única</span></h2>
+            <a href="#catalogo" class="inline-block border border-gold text-gold hover:bg-gold hover:text-midnight px-8 py-3 uppercase tracking-widest text-xs transition-all duration-500 rounded-sm">Explorar Coleção</a>
+        </div>
+    </section>
 
-    function initLoginHandlers(){
-      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
-      modal.querySelector('#sessao-usuario-to-signup').addEventListener('click', ()=> showSignup());
-      modal.querySelector('#sessao-usuario-forgot').addEventListener('click', ()=> showForgot());
-      modal.querySelector('#sessao-usuario-login').addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        const email = modal.querySelector('#sessao-usuario-login-email').value.trim().toLowerCase();
-        const password = modal.querySelector('#sessao-usuario-login-password').value;
-        const users = loadUsers();
-        const msgEl = modal.querySelector('#sessao-usuario-login-msg');
-        msgEl.textContent = '';
-        if(!users[email]){ msgEl.textContent = 'Conta não encontrada.'; return; }
-        const {saltHex, hashHex: storedHash} = users[email];
-        const {hashHex} = await derivePasswordHash(password, saltHex);
-        if(hashHex !== storedHash){ msgEl.textContent = 'Senha incorreta.'; return; }
-        setCurrent(email);
-        closeModal();
-        onAuthChange(true);
-      });
-    }
+    <main id="catalogo" class="container mx-auto px-4 md:px-6 py-16">
+        
+        <div id="no-results" class="hidden text-center py-20 text-gray-500 flex flex-col items-center gap-4">
+            <i class="fas fa-search text-5xl opacity-30"></i>
+            <p class="text-xl font-light">Nenhum perfume corresponde à sua busca.</p>
+            <button onclick="clearSearch()" class="text-gold hover:underline">Limpar busca</button>
+        </div>
 
-    function initSignupHandlers(){
-      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
-      modal.querySelector('#sessao-usuario-to-login').addEventListener('click', ()=> showLogin());
-      modal.querySelector('#sessao-usuario-signup').addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        const name = modal.querySelector('#sessao-usuario-signup-name').value.trim();
-        const email = modal.querySelector('#sessao-usuario-signup-email').value.trim().toLowerCase();
-        const password = modal.querySelector('#sessao-usuario-signup-password').value;
-        const msgEl = modal.querySelector('#sessao-usuario-signup-msg');
-        msgEl.textContent = '';
-        if(password.length < 8){ msgEl.textContent = 'Senha muito curta (mín 8 chars).'; return; }
-        const users = loadUsers();
-        if(users[email]){ msgEl.textContent = 'Já existe uma conta com este e-mail.'; return; }
-        const {hashHex, saltHex} = await derivePasswordHash(password, null);
-        users[email] = {name, email, saltHex, hashHex, photoDataUrl: ''};
-        saveUsers(users);
-        setCurrent(email);
-        closeModal();
-        onAuthChange(true);
-      });
-    }
+        <div id="section-boticario" class="mb-20 product-section">
+            <div class="text-center mb-10">
+                <h3 class="text-4xl font-serif text-midnight mb-2">Boticário</h3>
+                <div class="w-16 h-px bg-gold mx-auto"></div>
+            </div>
+            <div id="grid-boticario" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                </div>
+        </div>
 
-    // --- EmailJS integration will be invoked in forgot handler ---
-    // We'll load and init EmailJS at the bottom of this script.
+        <div id="section-brand" class="mb-10 product-section">
+            <div class="text-center mb-10">
+                <h3 class="text-4xl font-serif text-midnight mb-2">Brand <span class="text-xl font-light italic text-gray-500">(Linha Coleção)</span></h3>
+                <div class="w-16 h-px bg-gold mx-auto"></div>
+            </div>
+            <div id="grid-brand" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                </div>
+        </div>
+    </main>
 
-    function initForgotHandlers(){
-      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
-      modal.querySelector('#sessao-usuario-to-login-2').addEventListener('click', ()=> showLogin());
-      modal.querySelector('#sessao-usuario-forgot-form').addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        const email = modal.querySelector('#sessao-usuario-forgot-email').value.trim().toLowerCase();
-        const msgEl = modal.querySelector('#sessao-usuario-forgot-msg');
-        const successEl = modal.querySelector('#sessao-usuario-forgot-success');
-        msgEl.textContent = ''; successEl.textContent=''; successEl.classList.add('sessao-usuario-hidden');
-        const users = loadUsers();
-        if(!users[email]){ msgEl.textContent = 'E-mail não encontrado.'; return; }
+    <footer class="bg-midnight text-white py-12 border-t-4 border-gold">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-serif tracking-widest mb-4">ELEGANCE</h2>
+            <p class="text-sm text-gray-400 font-light">Atendimento exclusivo via WhatsApp.</p>
+            <p class="text-sm text-gray-400 font-light mt-2">&copy; 2024 Elegance Perfumes. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-        // generate token
-        const token = Math.random().toString(36).slice(2,10).toUpperCase();
-        const expiresAt = Date.now() + (1000*60*15); // 15 minutes
-        saveResetToken(email, token, expiresAt);
+    <div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+    
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-500 z-50 flex flex-col">
+        <div class="px-6 py-5 bg-white border-b flex justify-between items-center">
+            <h2 class="text-2xl font-serif text-midnight">Sua Sacola</h2>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-gold transition-colors duration-300 text-xl"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div id="cart-items" class="p-6 flex-1 overflow-y-auto flex flex-col gap-6">
+            </div>
+        
+        <div class="p-6 bg-gray-50 border-t border-gray-100">
+            <div class="flex justify-between font-serif text-xl text-midnight mb-6">
+                <span>Total</span>
+                <span id="cart-total">R$ 0,00</span>
+            </div>
+            <button onclick="checkout()" class="w-full bg-midnight text-white uppercase tracking-widest text-sm py-4 rounded-sm hover:bg-gold transition-colors duration-500 shadow-lg">
+                Finalizar no WhatsApp
+            </button>
+        </div>
+    </div>
 
-        // prepare name for email
-        const nomeParaEmail = (users[email].name && users[email].name.trim()) ? users[email].name.trim() : email.split('@')[0];
+    <script>
+        // Puxar produtos do localStorage (ou array vazio se não houver nada)
+        let products = JSON.parse(localStorage.getItem('perfume_products')) || [];
+        
+        // Se a loja estiver vazia na primeira vez, adiciona produtos padrão com imagem base64
+        if (products.length === 0) {
+            products = [
+                { id: 1, name: "Floratta Simple Love", brand: "boticario", price: 139.90, stock: 5, image: "" },
+                { id: 2, name: "Malbec Gold", brand: "boticario", price: 199.90, stock: 2, image: "" },
+                { id: 3, name: "Good Girl (Inspirado)", brand: "brand", price: 89.90, stock: 10, image: "" },
+                { id: 4, name: "Elysée Nuit", brand: "boticario", price: 259.00, stock: 0, image: "" }
+            ];
+            localStorage.setItem('perfume_products', JSON.stringify(products));
+        }
 
-        // send via EmailJS
-        // the template expects: to_name, to_email, token
-        // service/template/public keys are baked below (replace if needed)
-        const serviceId = 'service_q6u8vzl';
-        const templateId = 'template_jpid2jq';
+        let cart = [];
 
-        const templateParams = {
-          to_name: nomeParaEmail,
-          to_email: email,
-          token: token
-        };
+        function renderProducts(productsToRender = products) {
+            const gridBot = document.getElementById('grid-boticario');
+            const gridBrand = document.getElementById('grid-brand');
+            const noResults = document.getElementById('no-results');
+            const sectionBot = document.getElementById('section-boticario');
+            const sectionBrand = document.getElementById('section-brand');
+            
+            gridBot.innerHTML = ''; gridBrand.innerHTML = '';
+            
+            let countBot = 0;
+            let countBrand = 0;
 
-        // try sending email; fallback to showing token in UI
-        if(window.emailjs && typeof window.emailjs.send === 'function'){
-          window.emailjs.send(serviceId, templateId, templateParams)
-            .then(function(response){
-              successEl.textContent = 'E-mail de recuperação enviado. Verifique sua caixa de entrada (ou spam).';
-              successEl.classList.remove('sessao-usuario-hidden');
-              setTimeout(()=>showReset(), 1400);
-            }, function(error){
-              console.error('EmailJS error:', error);
-              successEl.textContent = 'Não foi possível enviar o e-mail automaticamente. Use este token: ' + token;
-              successEl.classList.remove('sessao-usuario-hidden');
-              setTimeout(()=>showReset(), 1400);
+            productsToRender.forEach(p => {
+                const isEsgotado = p.stock <= 0;
+                
+                // Define a imagem: Usa a base64 salva OU o placeholder "sem imagem"
+                const imageHtml = p.image 
+                    ? `<img src="${p.image}" alt="${p.name}" class="product-image transform group-hover:scale-105 transition-transform duration-700">`
+                    : `<span class="text-gray-400 font-serif tracking-widest text-xs uppercase transform group-hover:scale-110 transition-transform duration-700 p-4 text-center">sem imagem</span>`;
+
+                const card = `
+                    <div class="group bg-white rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden relative flex flex-col">
+                        <div class="h-64 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center overflow-hidden relative border-b border-gray-100">
+                            ${imageHtml}
+                            ${isEsgotado ? '<div class="absolute top-3 right-3 bg-midnight text-white text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-md z-10">Esgotado</div>' : ''}
+                        </div>
+                        
+                        <div class="p-5 flex flex-col flex-1 bg-white relative z-10">
+                            <h4 class="text-base font-serif text-midnight mb-1 group-hover:text-gold transition-colors line-clamp-2 h-12">${p.name}</h4>
+                            <p class="text-xl text-gray-800 font-light mb-5">R$ ${parseFloat(p.price).toFixed(2).replace('.', ',')}</p>
+                            
+                            <div class="mt-auto">
+                                ${isEsgotado 
+                                    ? '<button disabled class="w-full border border-gray-200 text-gray-400 py-2.5 uppercase tracking-widest text-xs cursor-not-allowed rounded-sm">Indisponível</button>' 
+                                    : `<button onclick="addToCart(${p.id})" class="w-full bg-white border border-midnight text-midnight py-2.5 uppercase tracking-widest text-xs hover:bg-midnight hover:text-white transition-all duration-300 rounded-sm">Adicionar à Sacola</button>`}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                if(p.brand === 'boticario') {
+                    gridBot.innerHTML += card;
+                    countBot++;
+                } else {
+                    gridBrand.innerHTML += card;
+                    countBrand++;
+                }
             });
-        } else {
-          // EmailJS não carregado — exibir token para teste
-          successEl.textContent = 'EmailJS não disponível. Use este token: ' + token;
-          successEl.classList.remove('sessao-usuario-hidden');
-          setTimeout(()=>showReset(), 1400);
-        }
-      });
-    }
 
-    function initResetHandlers(){
-      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
-      modal.querySelector('#sessao-usuario-to-login-3').addEventListener('click', ()=> showLogin());
-      modal.querySelector('#sessao-usuario-reset-form').addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        const email = modal.querySelector('#sessao-usuario-reset-email').value.trim().toLowerCase();
-        const token = modal.querySelector('#sessao-usuario-reset-token').value.trim();
-        const newPass = modal.querySelector('#sessao-usuario-reset-password').value;
-        const msgEl = modal.querySelector('#sessao-usuario-reset-msg');
-        msgEl.textContent = '';
-        if(newPass.length < 8){ msgEl.textContent = 'Senha muito curta.'; return; }
-        const stored = getResetToken(email);
-        if(!stored || stored.token !== token || stored.expiresAt < Date.now()){ msgEl.textContent = 'Token inválido ou expirado.'; return; }
-        const users = loadUsers();
-        if(!users[email]){ msgEl.textContent = 'Conta não encontrada.'; return; }
-        const {hashHex, saltHex} = await derivePasswordHash(newPass, null);
-        users[email].hashHex = hashHex;
-        users[email].saltHex = saltHex;
-        saveUsers(users);
-        removeResetToken(email);
-        setCurrent(email);
-        closeModal();
-        onAuthChange(true);
-      });
-    }
-
-    function initProfileHandlers(){
-      modal.querySelector('[data-action="close"]').addEventListener('click', closeModal);
-      modal.querySelector('#sessao-usuario-save-profile').addEventListener('click', async ()=>{
-        const nameEl = modal.querySelector('#sessao-usuario-profile-name');
-        const emailEl = modal.querySelector('#sessao-usuario-profile-email');
-        const currentPassEl = modal.querySelector('#sessao-usuario-profile-current-password');
-        const newPassEl = modal.querySelector('#sessao-usuario-profile-new-password');
-        const fileEl = modal.querySelector('#sessao-usuario-profile-photo');
-        const msgEl = modal.querySelector('#sessao-usuario-profile-msg');
-        msgEl.textContent='';
-        const newName = nameEl.value.trim();
-        const newEmail = emailEl.value.trim().toLowerCase();
-        const users = loadUsers();
-        const current = getCurrent();
-        if(!current || !users[current]){ msgEl.textContent='Erro: usuário não autenticado.'; return; }
-
-        if(newEmail !== current && users[newEmail]){ msgEl.textContent='Outro usuário já usa esse e-mail.'; return; }
-
-        if(fileEl.files && fileEl.files[0]){
-          const f = fileEl.files[0];
-          const reader = new FileReader();
-          reader.onload = function(ev){
-            users[current].photoDataUrl = ev.target.result;
-            finishUpdate();
-          };
-          reader.readAsDataURL(f);
-        } else {
-          finishUpdate();
+            // Exibe/Oculta seções e mensagem de "sem resultados"
+            sectionBot.classList.toggle('hidden', countBot === 0);
+            sectionBrand.classList.toggle('hidden', countBrand === 0);
+            noResults.classList.toggle('hidden', productsToRender.length > 0);
         }
 
-        async function finishUpdate(){
-          if(newPassEl.value){
-            if(!currentPassEl.value){ msgEl.textContent='Informe a senha atual para trocar a senha.'; return; }
-            const {saltHex, hashHex: storedHash} = users[current];
-            const {hashHex} = await derivePasswordHash(currentPassEl.value, saltHex);
-            if(hashHex !== storedHash){ msgEl.textContent='Senha atual incorreta.'; return; }
-            const newDerived = await derivePasswordHash(newPassEl.value, null);
-            users[current].hashHex = newDerived.hashHex;
-            users[current].saltHex = newDerived.saltHex;
-          }
+        // FUNÇÃO DE BUSCA TURBINADA COM STRING
+        function searchProducts() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+            
+            if (searchTerm === "") {
+                renderProducts(products); // Mostra tudo se busca vazia
+                return;
+            }
 
-          users[current].name = newName || users[current].name;
-
-          if(newEmail !== current){
-            users[newEmail] = {...users[current], email:newEmail};
-            delete users[current];
-            saveUsers(users);
-            setCurrent(newEmail);
-          } else {
-            saveUsers(users);
-          }
-
-          msgEl.classList.remove('sessao-usuario-error');
-          msgEl.classList.add('sessao-usuario-success');
-          msgEl.textContent = 'Perfil atualizado.';
-          setTimeout(()=>{ closeModal(); onAuthChange(true); }, 900);
+            // Filtra produtos comparando nome OU marca com a string digitada
+            const filteredProducts = products.filter(p => 
+                p.name.toLowerCase().includes(searchTerm) || 
+                p.brand.toLowerCase().includes(searchTerm)
+            );
+            
+            renderProducts(filteredProducts);
         }
-      });
 
-      const logoutBtn = modal.querySelector('#sessao-usuario-logout');
-      logoutBtn.addEventListener('click', ()=>{ setCurrent(''); closeModal(); onAuthChange(false); });
-
-      const fileInput = modal.querySelector('#sessao-usuario-profile-photo');
-      if(fileInput){
-        fileInput.addEventListener('change', (e)=>{
-          const f = e.target.files[0];
-          if(!f) return;
-          const reader = new FileReader();
-          reader.onload = (ev)=>{
-            const img = modal.querySelector('#sessao-usuario-avatar-img');
-            img && (img.outerHTML = `<img src="${ev.target.result}" class="sessao-usuario-avatar" id="sessao-usuario-avatar-img" />`);
-          };
-          reader.readAsDataURL(f);
-        });
-      }
-    }
-
-    // --- Auth UI state changes ---
-    function onAuthChange(signedIn){
-      const current = getCurrent();
-      if(signedIn && current){
-        const users = loadUsers();
-        const u = users[current];
-        floatingBtn.textContent = u && u.name ? (u.name.split(' ')[0]) : 'Conta';
-        floatingBtn.title = 'Abrir perfil';
-        floatingBtn.onclick = showProfile;
-      } else {
-        floatingBtn.textContent = 'Minha Conta';
-        floatingBtn.title = 'Entrar / Registrar';
-        floatingBtn.onclick = ()=> showLogin();
-      }
-    }
-     // If page has element with id 'btn-minha-conta', use it instead of floating
-    const existing = document.getElementById('btn-minha-conta');
-    if(existing){
-      existing.addEventListener('click', ()=> {
-        const cur = getCurrent();
-        if(cur) showProfile(); else showLogin();
-      });
-      floatingBtn.style.display = 'none';
-    }
-
-    // initialize
-    (function init(){
-      overlay.querySelectorAll('.sessao-usuario-close').forEach(b=>b.addEventListener('click', closeModal));
-      const cur = getCurrent();
-      onAuthChange(!!cur);
-    })();
-
-    // expose helper
-    window.SessaoUsuarioLocal = {
-      openLogin: ()=> showLogin(),
-      openSignup: ()=> showSignup(),
-      openProfile: ()=> showProfile(),
-      isAuthenticated: ()=> !!getCurrent(),
-      getCurrentUser: ()=>{
-        const cur = getCurrent();
-        const users = loadUsers();
-        return cur && users[cur] ? {...users[cur], hashHex:undefined, saltHex:undefined} : null;
-      }
-    };
-
-  })();
-  </script>
-  <!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-<script>
-  // Inicializa o EmailJS
-  emailjs.init("rljVhYiVragsliOtX"); // <-- Cole sua Public Key aqui
-
-  async function enviarTokenEmail(nomeUsuario, emailUsuario, tokenGerado) {
-    try {
-      const resposta = await emailjs.send(
-        "service_q6u8vzl,     // <-- Cole seu Service ID aqui
-        "template_jpid2jq",    // <-- Cole seu Template ID aqui
-        {
-          user_name: nomeUsuario,
-          user_email: emailUsuario,
-          reset_token: tokenGerado
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            searchProducts();
         }
-      );
 
-      if (resposta.status === 200) {
-        alert("✅ E-mail de recuperação enviado com sucesso!");
-      } else {
-        alert("⚠️ Não foi possível enviar o e-mail. Código: " + resposta.status);
-      }
-    } catch (erro) {
-      console.error("Erro ao enviar e-mail:", erro);
-      alert("❌ Ocorreu um erro ao enviar o e-mail. Verifique sua conexão ou configuração do EmailJS.");
-    }
-  }
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const overlay = document.getElementById('cart-overlay');
+            
+            sidebar.classList.toggle('translate-x-full');
+            
+            if(sidebar.classList.contains('translate-x-full')) {
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            } else {
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            }
+        }
 
-  // Exemplo de uso
-  // enviarTokenEmail("Gabriel", "exemplo@gmail.com", "ABCD1234");
-</script>
-  </script>
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if(product && product.stock > 0) {
+                const item = cart.find(i => i.id === id);
+                if(item) {
+                    if(item.qtd < product.stock) item.qtd++;
+                    else alert('Estoque máximo atingido para este item.');
+                } else {
+                    cart.push({...product, qtd: 1});
+                    // Feedback visual simples
+                    const btn = event.currentTarget;
+                    const originalText = btn.innerText;
+                    btn.innerText = "Adicionado ✓";
+                    btn.classList.replace('bg-white', 'bg-gold');
+                    btn.classList.replace('text-midnight', 'text-white');
+                    btn.classList.replace('border-midnight', 'border-gold');
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.classList.replace('bg-gold', 'bg-white');
+                        btn.classList.replace('text-white', 'text-midnight');
+                        btn.classList.replace('border-gold', 'border-midnight');
+                    }, 1500);
+                }
+                updateCart();
+            }
+        }
 
+        function updateCart() {
+            const container = document.getElementById('cart-items');
+            let total = 0;
+            let count = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-gray-400 space-y-4 mt-20">
+                        <i class="fas fa-shopping-bag text-5xl opacity-30 mb-4"></i>
+                        <p class="font-light text-lg">Sua sacola está vazia.</p>
+                    </div>`;
+            } else {
+                container.innerHTML = '';
+                cart.forEach((item, index) => {
+                    total += item.price * item.qtd;
+                    count += item.qtd;
+                    
+                    const imgInCart = item.image 
+                        ? `<img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-contain p-1 border rounded-sm">`
+                        : `<div class="w-16 h-16 bg-gray-100 rounded-sm flex items-center justify-center text-[8px] text-gray-400 font-serif uppercase text-center p-1 border">sem<br>imagem</div>`;
+
+                    container.innerHTML += `
+                        <div class="flex gap-4 items-center border-b border-gray-100 pb-4">
+                            ${imgInCart}
+                            <div class="flex-1">
+                                <p class="font-serif text-sm text-midnight">${item.name}</p>
+                                <p class="text-xs text-gray-500 mt-1">Qtd: ${item.qtd}</p>
+                                <p class="text-sm font-semibold text-gold mt-1">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
+                            </div>
+                            <button onclick="cart.splice(${index}, 1); updateCart()" class="text-gray-300 hover:text-red-500 transition-colors p-2"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            document.getElementById('cart-count').innerText = count;
+        }
+
+        function checkout() {
+            if(cart.length === 0) return alert('Sua sacola está vazia!');
+            
+            let text = "✨ Olá! Gostaria de fazer o seguinte pedido na *Elegance Perfumes*:%0A%0A";
+            let total = 0;
+            
+            cart.forEach(item => {
+                text += `🛍️ *${item.qtd}x* ${item.name} (${item.brand === 'boticario' ? 'Boticário' : 'Brand'}) - R$ ${(item.price * item.qtd).toFixed(2).replace('.', ',')}%0A`;
+                total += item.price * item.qtd;
+            });
+            
+            text += `%0A💎 *Total do Pedido: R$ ${total.toFixed(2).replace('.', ',')}*%0A%0AAguardo o retorno para combinar a entrega/pagamento!`;
+            
+            const numero = "5592994246242";
+            window.open(`https://wa.me/${numero}?text=${text}`, '_blank');
+        }
+
+        // Iniciar a loja
+        renderProducts();
+    </script>
 </body>
 </html>
-
